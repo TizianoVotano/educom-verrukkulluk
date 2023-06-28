@@ -32,7 +32,7 @@ class Ingredient {
         foreach ($ingredients as $ingredient) {
             // $articles = array_push($this->getArticle($ingredient['artikel_id']));
             // print_r($articles);
-            $this->getArticle(2);
+            $test = $this->getArticle(2);
         }
 
         // maak van ingredients en articles een lange array
@@ -41,6 +41,6 @@ class Ingredient {
     }
 
     private function getArticle($articleId) {
-        return($this->$article.selectArticle($articleId));
+        return($article.selectArticle($articleId));
     }
 }
