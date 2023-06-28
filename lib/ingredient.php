@@ -1,36 +1,46 @@
 <?php
-// require_once("database.php");
+require_once("database.php");
+require_once("article.php");
 
-// $db = new Database();
-// $ing = new Ingredient($db->getConnection());
+$db = new Database();
+$ing = new Ingredient($db->getConnection());
 
-// $data = $ing->selectIngredient(2);
+$data = $ing->selectIngredients(2);
 
-// var_dump($data);
+//var_dump($data);
 
 
 
 class Ingredient {
     private $connection;
+    private $article;
     
     public function __construct($connection) {
         $this->connection = $connection;
+        $this->article = new Article($connection);
     }
 
-    public function selectIngredient($ingredient_id) {
-        $sql = "select * from ingredient where id = $ingredient_id;";
-        
-
+    public function selectIngredients($gerecht_id) {
+        // -haalt ingredienten op
+        $sql = "select * from ingredient where gerecht_id = $gerecht_id;";
         $result = mysqli_query($this->connection, $sql);
-        $ingredient = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $ingredients = mysqli_fetch_all($result, MYSQLI_ASSOC); 
+       // print_r($ingredients);
         
-        $article = getArticle(intval($ingredient["gerecht_id"]));
-        return($article);
+        // haal articles op
+        // ingredients worden opgehaald
+        foreach ($ingredients as $ingredient) {
+            // $articles = array_push($this->getArticle($ingredient['artikel_id']));
+            // print_r($articles);
+            $this->getArticle(2);
+        }
+
+        // maak van ingredients en articles een lange array
+
+        return($ingredients);
     }
 
     private function getArticle($articleId) {
-        $article = new Article();
-        $article->selectArticle($articleId);
-        return($article);
+        return($this->$article.selectArticle($articleId));
     }
 }
