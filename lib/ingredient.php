@@ -1,16 +1,4 @@
 <?php
-require_once("database.php");
-require_once("article.php");
-
-$db = new Database();
-$ing = new Ingredient($db->getConnection());
-
-$data = $ing->selectIngredients(2);
-
-//var_dump($data);
-
-
-
 class Ingredient {
     private $connection;
     private $article;
@@ -21,23 +9,20 @@ class Ingredient {
     }
 
     public function selectIngredients($gerecht_id) {
-        // -haalt ingredienten op
         $sql = "select * from ingredient where gerecht_id = $gerecht_id;";
         $result = mysqli_query($this->connection, $sql);
+
         $ingredients = mysqli_fetch_all($result, MYSQLI_ASSOC); 
-       // print_r($ingredients);
-        
-        // haal articles op
-        // ingredients worden opgehaald
+        $articles = array();
         foreach ($ingredients as $ingredient) {
-            // $articles = array_push($this->getArticle($ingredient['artikel_id']));
-            // print_r($articles);
-            $test = $this->getArticle(2);
+            array_push($articles, $this->getArticle($ingredient['artikel_id']));
         }
-
-        // maak van ingredients en articles een lange array
-
-        return($ingredients);
+        
+        $ingredientsWithArticles = array("ingredients"=>$ingredients, "articles"=>$articles);
+       
+        // echo "<pre>";print_r($ingredientsWithArticles);echo "</pre>";
+        
+        return($ingredientsWithArticles);
     }
 
     private function getArticle($articleId) {
