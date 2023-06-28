@@ -41,6 +41,6 @@ class Ingredient {
     }
 
     private function getArticle($articleId) {
-        return($this->$article->selectArticle($articleId));
+        return($this->article->selectArticle($articleId));
     }
 }
