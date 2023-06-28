@@ -1,19 +1,23 @@
 <?php
 
 require_once("lib/database.php");
-require_once("lib/artikel.php");
+require_once("lib/article.php");
 require_once("lib/user.php");
+require_once("lib/kitchen_type.php");
 
 /// INIT
-$db = new database();
-$art = new artikel($db->getConnection());
-$user = new user($db->getConnection());
+$db = new Database();
+$art = new Article($db->getConnection());
+$user = new User($db->getConnection());
+$kitchenType = new KitchenType($db->getConnection());
 
 
 /// VERWERK 
-$data = $art->selecteerArtikel(8);
-$dataUsers = $user->selecteerUser(2);
+$data = $art->selectArticle(8);
+$dataUsers = $user->selectUser(2);
+$dataKitchenType = $kitchenType->selectKitchenType(2);
 
 /// RETURN
-var_dump($data);
-var_dump($dataUsers);
+echo "<pre>"; var_dump($data); echo "</pre>";
+echo "<pre>"; var_dump($dataUsers); echo "</pre>";
+echo "<pre>"; var_dump($dataKitchenType); echo "</pre>";
