@@ -45,22 +45,23 @@ class RecipeInfo {
     }
 
     public function addFavourite($gerecht_id, $user_id) {
-        // het skelet van wat ik ervan zal maken
-        $sql = "INSERT INTO recept_info (firstname, lastname, email)
-        VALUES ('John', 'Doe', 'john@example.com')";
-
-        if ($conn->query($sql) === TRUE) {
-        echo "New record created successfully";
+        $sql = "INSERT INTO `gerecht_info` (`record_type[O,B,W,F]`, `gerecht_id`, `user_id`)
+                VALUES ('F', $gerecht_id, $user_id)";
+        if ($this->connection->query($sql) === TRUE){
+            echo "Record inserted succesfully";
         } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
+            echo "Failed miserably";
         }
     }
 
+    // Vragen: Wordt de uniekheid (het blokkeren van de actie als die bestaat) 
+    // van een (favourite) field hierin bepaald of in de DB?
     public function removeFavourite($gerecht_id, $user_id) {
-        // het skelet van wat ik ervan zal maken
-        $sql = "DELETE FROM MyGuests WHERE id=3";
+        $sql = "DELETE FROM `gerecht_info` WHERE `record_type[O,B,W,F]` = 'F' 
+                                           AND `gerecht_id` = $gerecht_id 
+                                           AND `user_id` = $user_id";
 
-        if ($conn->query($sql) === TRUE) {
+        if ($this->connection->query($sql) === TRUE) {
         echo "Record deleted successfully";
         } else {
         echo "Error deleting record: " . $conn->error;

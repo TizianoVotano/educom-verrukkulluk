@@ -22,6 +22,8 @@ $dataUsers = $user->selectUser(2);
 $dataKitchenType = $kitchenType->selectKitchenType(2);
 $dataIngredient = $ingredient->selectIngredients(2);
 $dataRecipeInfo = $recipeInfo->selectInfo(1);
+$dataRecipeInfo = $recipeInfo->addFavourite(1, 2); // $gerecht_id, $user_id
+//$dataRecipeInfo = $recipeInfo->removeFavourite(1, 2);
 
 /// RETURN
 // echo "<pre>"; var_dump($data); echo "</pre>";
