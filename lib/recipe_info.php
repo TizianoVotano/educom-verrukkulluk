@@ -44,12 +44,27 @@ class RecipeInfo {
         return $this->user->selectUser($user_id);
     }
 
-    public function addFavourite($user_id) {
-        
+    public function addFavourite($gerecht_id, $user_id) {
+        // het skelet van wat ik ervan zal maken
+        $sql = "INSERT INTO recept_info (firstname, lastname, email)
+        VALUES ('John', 'Doe', 'john@example.com')";
+
+        if ($conn->query($sql) === TRUE) {
+        echo "New record created successfully";
+        } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+        }
     }
 
-    public function removeFavourite() {
+    public function removeFavourite($gerecht_id, $user_id) {
+        // het skelet van wat ik ervan zal maken
+        $sql = "DELETE FROM MyGuests WHERE id=3";
 
+        if ($conn->query($sql) === TRUE) {
+        echo "Record deleted successfully";
+        } else {
+        echo "Error deleting record: " . $conn->error;
+        }
     }
 
     // public function addRating() {
