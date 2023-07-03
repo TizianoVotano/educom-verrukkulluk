@@ -9,7 +9,7 @@ class RecipeInfo {
         $this->user = new User($connection);
     }
 
-    public function selectInfo($gerecht_id) {
+    public function selectRecipeInfo($gerecht_id) {
         $sql = "select * from gerecht_info where gerecht_id = $gerecht_id";
 
         $result = mysqli_query($this->connection, $sql);
@@ -54,8 +54,8 @@ class RecipeInfo {
         }
     }
 
-    // Vragen: Wordt de uniekheid (het blokkeren van de actie als die bestaat) 
-    // van een (favourite) field hierin bepaald of in de DB?
+    // Vraag: Mogelijk een beperking in de backend zelf of een constraint considereren over "Favourites", F - gerecht_id - user_id
+    // zie slack voor links in verband hierover
     public function removeFavourite($gerecht_id, $user_id) {
         $sql = "DELETE FROM `gerecht_info` WHERE `record_type[O,B,W,F]` = 'F' 
                                            AND `gerecht_id` = $gerecht_id 
