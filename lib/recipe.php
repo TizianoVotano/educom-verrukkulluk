@@ -25,7 +25,7 @@ class Recipe {
         $recipe = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
 
-        $this->selectKitchen($recipe["keuken_id"]);
+        $this->selectKitchen($recipe["keuken_id"]); 
         $this->selectType($recipe["type_id"]);
         $this->selectIngredients($recipe["id"]);
         $this->selectRecipeInfo($recipe["id"]);
