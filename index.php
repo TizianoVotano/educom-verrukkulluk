@@ -23,14 +23,14 @@ $recipe = new Recipe($db->getConnection());
 // $dataUsers = $user->selectUser(2);
 // $dataKitchenType = $kitchenType->selectKitchenType(2);
 // $dataIngredient = $ingredient->selectIngredients(2);
-// $dataRecipeInfo = $recipeInfo->selectInfo(1);
+// $dataRecipeInfo = $recipeInfo->selectRecipeInfo(1);
 // $dataRecipeInfo = $recipeInfo->addFavourite(1, 2); // $gerecht_id, $user_id
 // $dataRecipeInfo = $recipeInfo->removeFavourite(1, 2);
-// $dataRecipe = $recipe->selectRecipe();
+$dataRecipe = $recipe->selectRecipe(1);
 
 /// RETURN
 // echo "<pre>"; var_dump($data); echo "</pre>";
 // echo "<pre>"; var_dump($dataUsers); echo "</pre>";
 // echo "<pre>"; var_dump($dataKitchenType); echo "</pre>";
 // echo "<pre>"; var_dump($dataIngredient); echo "</pre>";
-echo "<pre>"; var_dump($dataRecipeInfo); echo "</pre>";
+// echo "<pre>"; var_dump($dataRecipe); echo "</pre>";
