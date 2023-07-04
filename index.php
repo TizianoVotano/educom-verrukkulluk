@@ -34,5 +34,5 @@ $dataRecipe = $recipe->selectRecipe(1);
 // echo "<pre>"; var_dump($dataUsers); echo "</pre>";
 // echo "<pre>"; var_dump($dataKitchenType); echo "</pre>";
 // echo "<pre>"; var_dump($dataIngredient); echo "</pre>";
-// echo "<pre>"; var_dump($dataRecipe); echo "</pre>";
+ echo "<pre>"; print_r($dataRecipe); echo "</pre>";
 // var_dump($dataFavourite);
