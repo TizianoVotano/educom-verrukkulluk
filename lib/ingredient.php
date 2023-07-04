@@ -13,15 +13,11 @@ class Ingredient {
         $result = mysqli_query($this->connection, $sql);
 
         $ingredients = mysqli_fetch_all($result, MYSQLI_ASSOC); 
-        
-        //$articles = array();
+
         $ingredientsWithArticles = [];
         foreach ($ingredients as $ingredient) {
-            //array_push($articles, $this->getArticle($ingredient['artikel_id']));
             array_push($ingredientsWithArticles, $ingredient + ["artikel" => $this->getArticle($ingredient['artikel_id'])]);
-        }
-        
-        //$ingredientsWithArticles = array("ingredients"=>$ingredients, "articles"=>$articles);        
+        }     
         return($ingredientsWithArticles);
     }
 
