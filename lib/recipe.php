@@ -28,26 +28,29 @@ class Recipe {
         $kitchen = $this->selectKitchen($recipe["keuken_id"]); 
         $type = $this->selectType($recipe["type_id"]);
         $ingredients = $this->selectIngredients($recipe["id"]);
-        $recipe_info = $this->selectRecipeInfo($recipe["id"]);
+
+        $comments = $this->selectRecipeInfo($recipe["id"], "O");
+        $preparation = $this->selectRecipeInfo($recipe["id"], "B");
+        $favorite = $this->selectRecipeInfo($recipe["id"], "F");
+        $rating = $this->selectRecipeInfo($recipe["id"], "W");
 
         $price = $this->calcPrice($ingredients);
         $calories = $this->calcCalories($ingredients);
 
-        $returnRecipe = ["user"=>$user, "price"=>$price, "calories"=>$calories, "recipe"=>$recipe, 
-                        "recipe_info"=>$recipe_info, "kitchen"=>$kitchen, "type"=>$type, "ingredients"=>$ingredients];
+        $returnRecipe = ["user"=>$user, "price"=>$price, "calories"=>$calories, "recipe"=>$recipe,
+                        "comments"=>$comments, "preparation"=>$preparation, "favorite"=>$favorite, 
+                        "rating"=>$rating, "kitchen"=>$kitchen, "type"=>$type, "ingredients"=>$ingredients];
 
-        echo "<pre>";
-        print_r($returnRecipe);
-        echo "</pre>";
-        return($recipe);
+       // echo "<pre>";print_r($returnRecipe);echo "</pre>";
+        return($returnRecipe);
     }
 
     private function selectUser($user_id) {
         return $this->user->selectUser($user_id);
     }
 
-    private function selectRecipeInfo($recipe_id) {
-        return $this->recipe_info->selectRecipeInfo($recipe_id);
+    private function selectRecipeInfo($recipe_id, $record_type) {
+        return $this->recipe_info->selectRecipeInfo($recipe_id, $record_type);
     }
 
     private function selectIngredients($recipe_id) {
@@ -58,8 +61,8 @@ class Recipe {
         $calories = 0;
         foreach ($ingredients as $ingredient) {
             $quantity = $ingredient["aantal"];
-            $unit = $ingredient["artikel"]["eenheid"];
-            $unitCalorie = $ingredient["artikel"]["calories"];
+            $unit = $ingredient["eenheid"];
+            $unitCalorie = $ingredient["calories"];
 
             if ($quantity < 0)
                 $quantity = 0;
@@ -73,8 +76,8 @@ class Recipe {
         $price = 0;
         foreach ($ingredients as $ingredient) {
             $quantity = $ingredient["aantal"];
-            $unit = $ingredient["artikel"]["eenheid"];
-            $unitPrice = $ingredient["artikel"]["prijs"];
+            $unit = $ingredient["eenheid"];
+            $unitPrice = $ingredient["prijs"];
 
             if ($quantity < 0)
                 $quantity = 0;

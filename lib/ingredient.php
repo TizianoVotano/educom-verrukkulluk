@@ -14,14 +14,24 @@ class Ingredient {
 
         $ingredients = mysqli_fetch_all($result, MYSQLI_ASSOC); 
         
-        //$articles = array();
         $ingredientsWithArticles = [];
         foreach ($ingredients as $ingredient) {
-            //array_push($articles, $this->getArticle($ingredient['artikel_id']));
-            array_push($ingredientsWithArticles, $ingredient + ["artikel" => $this->getArticle($ingredient['artikel_id'])]);
+            //array_push($ingredientsWithArticles, $ingredient + ["artikel" => $this->getArticle($ingredient['artikel_id'])]);
+            $article = $this->getArticle($ingredient["artikel_id"]);
+            $ingredientsWithArticles[] = [
+                "id" => $ingredient["id"],
+                "gerecht_id" => $ingredient["gerecht_id"],
+                "artikel_id" => $ingredient["artikel_id"],
+                "aantal" => $ingredient["aantal"],
+                "naam" => $article["naam"],
+                "omschrijving" => $article["omschrijving"],
+                "prijs" => $article["prijs"],
+                "eenheid" => $article["eenheid"],
+                "verpakking" => $article["verpakking"],
+                "calories" => $article["calories"]
+            ];
         }
-        
-        //$ingredientsWithArticles = array("ingredients"=>$ingredients, "articles"=>$articles);        
+             
         return($ingredientsWithArticles);
     }
 

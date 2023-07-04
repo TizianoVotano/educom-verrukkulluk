@@ -9,43 +9,29 @@ class RecipeInfo {
         $this->user = new User($connection);
     }
 
-    public function selectRecipeInfo($gerecht_id) {
-        $sql = "select * from gerecht_info where gerecht_id = $gerecht_id";
-
+    public function selectRecipeInfo($gerecht_id, $record_type) {
+        $sql = "SELECT * FROM gerecht_info WHERE gerecht_id = $gerecht_id AND record_type = '$record_type'";
         $result = mysqli_query($this->connection, $sql);
         $recipeInfo = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-        return($this->sortRecipeInfo($recipeInfo));
-    }
-
-    private function sortRecipeInfo($recipeInfo) {
-        $sortedInformation = array("bereidingswijze"=>[], 
-                                    "opmerkingen"=>[], 
-                                    "waardering"=>[], 
-                                    "favoriet"=>[]);
-        foreach ($recipeInfo as $infoItem) {
-            if ("B" == $infoItem["record_type[O,B,W,F]"]) {
-                array_push($sortedInformation["bereidingswijze"], $infoItem);
-            } else if ("O" == $infoItem["record_type[O,B,W,F]"]) {
-                $infoItem["user"] = $this->getUser($infoItem["user_id"]);
-                array_push($sortedInformation["opmerkingen"], $infoItem);
-            } else if ("W" == $infoItem["record_type[O,B,W,F]"]) {
-                array_push($sortedInformation["waardering"], $infoItem);
-            } else if ("F" == $infoItem["record_type[O,B,W,F]"]) {
-                $infoItem["user"] = $this->getUser($infoItem["user_id"]);
-                array_push($sortedInformation["favoriet"], $infoItem);
+        $infoWithUser = [];
+        foreach($recipeInfo as $info) {
+            if ($record_type == "F" || $record_type == "O") {
+                $user = $this->selectUser($info["user_id"]);
+                $infoWithUser[] = array_merge($info, $user);
             }
         }
-
-        return $sortedInformation;
+        if (count($infoWithUser) > 0)
+            return $infoWithUser;
+        return($recipeInfo);
     }
 
-    private function getUser($user_id) {
+    private function selectUser($user_id) {
         return $this->user->selectUser($user_id);
     }
 
     public function addFavourite($gerecht_id, $user_id) {
-        $sql = "INSERT INTO `gerecht_info` (`record_type[O,B,W,F]`, `gerecht_id`, `user_id`)
+        $sql = "INSERT INTO `gerecht_info` (`record_type`, `gerecht_id`, `user_id`)
                 VALUES ('F', $gerecht_id, $user_id)";
         if ($this->connection->query($sql) === TRUE){
             echo "Record inserted succesfully";
@@ -54,10 +40,8 @@ class RecipeInfo {
         }
     }
 
-    // Vraag: Mogelijk een beperking in de backend zelf of een constraint considereren over "Favourites", F - gerecht_id - user_id
-    // zie slack voor links in verband hierover
     public function removeFavourite($gerecht_id, $user_id) {
-        $sql = "DELETE FROM `gerecht_info` WHERE `record_type[O,B,W,F]` = 'F' 
+        $sql = "DELETE FROM `gerecht_info` WHERE record_type = 'F' 
                                            AND `gerecht_id` = $gerecht_id 
                                            AND `user_id` = $user_id";
 
@@ -67,8 +51,4 @@ class RecipeInfo {
         echo "Error deleting record: " . $conn->error;
         }
     }
-
-    // public function addRating() {
-
-    // }
 }
