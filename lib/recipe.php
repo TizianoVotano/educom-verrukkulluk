@@ -19,27 +19,31 @@ class Recipe {
         $this->kitchen_type = new KitchenType($connection);
     }
 
-    public function selectRecipe($gerecht_id) {
-        $sql = "select * from gerecht where id = $gerecht_id";
+    public function selectRecipe($gerecht_id = null) {
+        $sql = "SELECT * FROM gerecht";
+        if ($gerecht_id != null)
+            $sql .= " WHERE id = $gerecht_id";
+
+        $returnRecipe;
         $result = mysqli_query($this->connection, $sql);
-        $recipe = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        while ($recipe = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $user = $this->selectUser($recipe["user_id"]);
+            $kitchen = $this->selectKitchen($recipe["keuken_id"]); 
+            $type = $this->selectType($recipe["type_id"]);
+            $ingredients = $this->selectIngredients($recipe["id"]);
 
-        $user = $this->selectUser($recipe["user_id"]);
-        $kitchen = $this->selectKitchen($recipe["keuken_id"]); 
-        $type = $this->selectType($recipe["type_id"]);
-        $ingredients = $this->selectIngredients($recipe["id"]);
+            $comments = $this->selectRecipeInfo($recipe["id"], "O");
+            $preparation = $this->selectRecipeInfo($recipe["id"], "B");
+            $favorite = $this->selectRecipeInfo($recipe["id"], "F");
+            $rating = $this->selectRecipeInfo($recipe["id"], "W");
 
-        $comments = $this->selectRecipeInfo($recipe["id"], "O");
-        $preparation = $this->selectRecipeInfo($recipe["id"], "B");
-        $favorite = $this->selectRecipeInfo($recipe["id"], "F");
-        $rating = $this->selectRecipeInfo($recipe["id"], "W");
+            $price = $this->calcPrice($ingredients);
+            $calories = $this->calcCalories($ingredients);
 
-        $price = $this->calcPrice($ingredients);
-        $calories = $this->calcCalories($ingredients);
-
-        $returnRecipe = ["user"=>$user, "price"=>$price, "calories"=>$calories, "recipe"=>$recipe,
+            $returnRecipe[] = ["user"=>$user, "price"=>$price, "calories"=>$calories, "recipe"=>$recipe,
                         "comments"=>$comments, "preparation"=>$preparation, "favorite"=>$favorite, 
                         "rating"=>$rating, "kitchen"=>$kitchen, "type"=>$type, "ingredients"=>$ingredients];
+        }
 
        // echo "<pre>";print_r($returnRecipe);echo "</pre>";
         return($returnRecipe);
