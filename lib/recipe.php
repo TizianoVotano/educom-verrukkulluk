@@ -93,11 +93,9 @@ class Recipe {
     }
 
     private function calcRating($ratings) {
-        echo "<pre>";print_r($ratings);echo "</pre>";
         $total = 0;
         foreach ($ratings as $rating) {
             $total += $rating["nummeriekveld"];
-            echo $total;
         }
         $count = count($ratings);
         
