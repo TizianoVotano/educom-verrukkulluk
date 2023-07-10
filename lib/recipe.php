@@ -35,7 +35,8 @@ class Recipe {
             $comments = $this->selectRecipeInfo($recipe["id"], "O");
             $preparation = $this->selectRecipeInfo($recipe["id"], "B");
             $favorite = $this->selectRecipeInfo($recipe["id"], "F");
-            $rating = $this->selectRecipeInfo($recipe["id"], "W");
+
+            $rating = $this->calcRating($this->selectRecipeInfo($recipe["id"], "W"));
 
             $price = $this->calcPrice($ingredients);
             $calories = $this->calcCalories($ingredients);
@@ -89,6 +90,21 @@ class Recipe {
         }
 
         return $price;
+    }
+
+    private function calcRating($ratings) {
+        echo "<pre>";print_r($ratings);echo "</pre>";
+        $total = 0;
+        foreach ($ratings as $rating) {
+            $total += $rating["nummeriekveld"];
+            echo $total;
+        }
+        $count = count($ratings);
+        
+        if ($count === 0 || $total === 0) 
+            return null;
+        $average = $total / $count;
+        return $average;
     }
 
     private function selectKitchen($id) {
