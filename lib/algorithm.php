@@ -20,26 +20,22 @@ class Algorithm {
     public function boodschappenToevoegen($recipe_id, $user_id) {
         $ingredients = $this->ingredients->selectIngredients($recipe_id);
 
-        $oudeBoodschappen = [];
-        $nieuweBoodschappen = [];
+        $commisionsToUpdate = [];
+        $commisionsToInsert = [];
 
         foreach ($ingredients as $ingredient) { 
             if ($boodschap = $this->artikelOpLijst($ingredient["artikel_id"], $user_id)) {
                 // artikel aanpassen
                 //$this->calcPrice($ingredient, $boodschap);
-                $oudeBoodschappen[] = ["id"=>$boodschap['id'], "aantal"=>$boodschap['aantal'] + $ingredient['aantal']];
+                $commisionsToUpdate[] = ["id"=>$boodschap['id'], "aantal"=>$boodschap['aantal'] + $ingredient['aantal']];
             } else {
                 // artikel toevoegen
-                $nieuweBoodschappen[] = ["artikel_id"=>$ingredient["artikel_id"], "aantal"=>$ingredient["aantal"]];
+                $commisionsToInsert[] = ["artikel_id"=>$ingredient["artikel_id"], "aantal"=>$ingredient["aantal"]];
             }
         }
 
-        echo "<pre>";print_r($oudeBoodschappen);echo "</pre>";
-        echo "<pre>";print_r($nieuweBoodschappen);echo "</pre>";
-
         // artikel aanpassen
-        $query = "";
-        foreach ($oudeBoodschappen as $boodschap) {
+        foreach ($commisionsToUpdate as $boodschap) {
             $query = "UPDATE boodschappen SET aantal = $boodschap[aantal] WHERE id = $boodschap[id];";
             if ($this->connection->query($query) === TRUE) 
                 echo "Record updated successfully";
@@ -47,14 +43,8 @@ class Algorithm {
                 echo "Error updating record: " . $this->connection->error;
         }
 
-        echo $query;
-
-        
-        ///////////////////
-
         // artikels toevoegen
-        
-        foreach ($nieuweBoodschappen as $boodschap) {
+        foreach ($commisionsToInsert as $boodschap) {
             print_r($boodschap);
             $sql = "INSERT INTO `boodschappen` (`user_id`, `artikel_id`, `aantal`) 
                     VALUES ($user_id, $boodschap[artikel_id], $boodschap[aantal]);"; // ingredients.aantal?
@@ -63,18 +53,18 @@ class Algorithm {
             else
                 echo "Failed miserably";
         }
-                
-        
-        /////////////////////
+
+        echo "<pre>";print_r($commisionsToUpdate);echo "</pre>";
+        echo "<pre>";print_r($commisionsToInsert);echo "</pre>";
     }
 
     public function artikelOpLijst($article_id, $user_id) {
-        $boodschappenLijst = $this->ophalenBoodschappen($user_id);
+        $commisionList = $this->ophalenBoodschappen($user_id);
 
-        foreach ($boodschappenLijst as $boodschapItem) {
-            if ($boodschapItem["artikel_id"] == $article_id) {
+        foreach ($commisionList as $commisionItem) {
+            if ($commisionItem["artikel_id"] == $article_id) {
                 // artikel is in de boodschappenlijst!
-                return $boodschapItem;
+                return $commisionItem;
             }
         }
         return false;
