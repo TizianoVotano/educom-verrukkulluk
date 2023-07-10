@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2023 at 11:58 AM
+-- Generation Time: Jul 10, 2023 at 01:38 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -33,26 +33,52 @@ CREATE TABLE `artikel` (
   `omschrijving` varchar(300) NOT NULL,
   `prijs` float NOT NULL,
   `eenheid` int(10) NOT NULL COMMENT 'aantal verpakkingen',
-  `verpakking` varchar(50) NOT NULL COMMENT 'bv grammen of liters'
+  `verpakking` varchar(50) NOT NULL COMMENT 'bv grammen of liters',
+  `calories` int(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `artikel`
 --
 
-INSERT INTO `artikel` (`id`, `naam`, `omschrijving`, `prijs`, `eenheid`, `verpakking`) VALUES
-(1, 'Spagetti_Barilla_nr13', 'Een pak spaghetti van het merk Barilla', 2, 250, 'gram'),
-(2, 'Knoflookbol', 'Netje met 5 bollen knoflook (50g/bol)', 2, 250, 'gram'),
-(3, 'Olijfolie', 'Flesje Olijfolie', 4.53, 500, 'ml'),
-(4, 'Rode Peper Pitjes', 'Gedroogde rode peper pitjes in een plastic verpakking', 6, 50, 'gram'),
-(5, 'Bolognese Saus', 'Klaargemaakte bolognese saus', 3.25, 500, 'gram'),
-(6, 'Zout', 'Zout in een container', 2, 100, 'gram'),
-(7, 'Pesto', 'Pesto van basilicum', 3.85, 200, 'gram'),
-(8, 'Parmezaanse Kaas', 'Geraspte parmezaanse kaas', 8.9, 200, 'gram'),
-(9, 'Pijnboompitten', 'Pijnboompitten', 10, 150, 'gram'),
-(10, 'Eieren', 'Een verpakking van 5 eieren', 2.5, 250, 'gram'),
-(11, 'Ham', 'Gesneden Ham', 7.25, 150, 'gram'),
-(12, 'Spek', 'Spekblokjes', 5, 200, 'gram');
+INSERT INTO `artikel` (`id`, `naam`, `omschrijving`, `prijs`, `eenheid`, `verpakking`, `calories`) VALUES
+(1, 'Spagetti_Barilla_nr13', 'Een pak spaghetti van het merk Barilla', 2, 250, 'gram', 10),
+(2, 'Knoflookbol', 'Netje met 5 bollen knoflook (50g/bol)', 2, 250, 'gram', 2),
+(3, 'Olijfolie', 'Flesje Olijfolie', 4.53, 500, 'ml', 30),
+(4, 'Rode Peper Pitjes', 'Gedroogde rode peper pitjes in een plastic verpakking', 6, 50, 'gram', 0),
+(5, 'Bolognese Saus', 'Klaargemaakte bolognese saus', 3.25, 500, 'gram', 45),
+(6, 'Zout', 'Zout in een container', 2, 100, 'gram', 0),
+(7, 'Pesto', 'Pesto van basilicum', 3.85, 200, 'gram', 8),
+(8, 'Parmezaanse Kaas', 'Geraspte parmezaanse kaas', 8.9, 200, 'gram', 35),
+(9, 'Pijnboompitten', 'Pijnboompitten', 10, 150, 'gram', 15),
+(10, 'Eieren', 'Een verpakking van 5 eieren', 2.5, 250, 'gram', 30),
+(11, 'Ham', 'Gesneden Ham', 7.25, 150, 'gram', 65),
+(12, 'Spek', 'Spekblokjes', 5, 200, 'gram', 74);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `boodschappen`
+--
+
+CREATE TABLE `boodschappen` (
+  `id` int(20) NOT NULL,
+  `user_id` int(20) NOT NULL,
+  `artikel_id` int(20) NOT NULL,
+  `aantal` int(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `boodschappen`
+--
+
+INSERT INTO `boodschappen` (`id`, `user_id`, `artikel_id`, `aantal`) VALUES
+(1, 2, 1, 7000),
+(2, 2, 2, 7),
+(3, 2, 3, 7),
+(4, 2, 4, 2),
+(5, 2, 6, 327),
+(6, 2, 5, 3000);
 
 -- --------------------------------------------------------
 
@@ -90,7 +116,7 @@ INSERT INTO `gerecht` (`id`, `keuken_id`, `type_id`, `user_id`, `datum_toegevoeg
 
 CREATE TABLE `gerecht_info` (
   `id` int(11) NOT NULL,
-  `record_type[O,B,W,F]` varchar(1) NOT NULL,
+  `record_type` varchar(1) NOT NULL,
   `gerecht_id` int(50) NOT NULL,
   `user_id` int(11) DEFAULT NULL COMMENT 'fk to gerechtinfo is optional',
   `datum` date DEFAULT NULL,
@@ -102,14 +128,14 @@ CREATE TABLE `gerecht_info` (
 -- Dumping data for table `gerecht_info`
 --
 
-INSERT INTO `gerecht_info` (`id`, `record_type[O,B,W,F]`, `gerecht_id`, `user_id`, `datum`, `nummeriekveld`, `tekstveld`) VALUES
+INSERT INTO `gerecht_info` (`id`, `record_type`, `gerecht_id`, `user_id`, `datum`, `nummeriekveld`, `tekstveld`) VALUES
 (1, 'B', 1, NULL, NULL, 1, 'Doe het water in een grote pot. Voeg het zout toe in het water en zet deze op hoog vuur tot het kookt.'),
 (2, 'B', 1, NULL, NULL, 2, 'Bereid de saus voor.'),
 (3, 'B', 1, NULL, NULL, 3, 'Haal de pasta uit de verpakking en zet het in het kokend water voor het aantal minuten dat op de verpakking staat.'),
 (4, 'B', 1, NULL, NULL, 4, 'Eens gaar giet je het water in een vergiet tot het er helemaal uit is. Dan zet je de pasta terug in de pot en voeg je de saus eraan toe en meng je het tot het goed verdeeld is. Smakelijk!'),
 (5, 'O', 1, 2, '2023-06-20', NULL, 'Heerlijk! Maar dit eet je best niet als je ergens naartoe moet.'),
 (6, 'W', 1, NULL, NULL, 4, NULL),
-(7, 'F', 1, 2, NULL, NULL, NULL);
+(10, 'F', 1, 2, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -205,6 +231,14 @@ ALTER TABLE `artikel`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `boodschappen`
+--
+ALTER TABLE `boodschappen`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_boodschappen_user_id` (`user_id`),
+  ADD KEY `fk_boodschappen_artikel_id` (`artikel_id`);
+
+--
 -- Indexes for table `gerecht`
 --
 ALTER TABLE `gerecht`
@@ -251,6 +285,12 @@ ALTER TABLE `artikel`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
+-- AUTO_INCREMENT for table `boodschappen`
+--
+ALTER TABLE `boodschappen`
+  MODIFY `id` int(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `gerecht`
 --
 ALTER TABLE `gerecht`
@@ -260,7 +300,7 @@ ALTER TABLE `gerecht`
 -- AUTO_INCREMENT for table `gerecht_info`
 --
 ALTER TABLE `gerecht_info`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `ingredient`
@@ -283,6 +323,13 @@ ALTER TABLE `user`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `boodschappen`
+--
+ALTER TABLE `boodschappen`
+  ADD CONSTRAINT `fk_boodschappen_artikel_id` FOREIGN KEY (`artikel_id`) REFERENCES `artikel` (`id`),
+  ADD CONSTRAINT `fk_boodschappen_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
 -- Constraints for table `gerecht`
