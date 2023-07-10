@@ -48,7 +48,7 @@ class RecipeInfo {
         if ($this->connection->query($sql) === TRUE) {
         echo "Record deleted successfully";
         } else {
-        echo "Error deleting record: " . $conn->error;
+        echo "Error deleting record: " . $this->connection->error;
         }
     }
 }

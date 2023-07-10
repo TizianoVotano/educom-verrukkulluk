@@ -7,6 +7,7 @@ require_once("lib/kitchen_type.php");
 require_once("lib/ingredient.php");
 require_once("lib/recipe_info.php");
 require_once("lib/recipe.php");
+require_once("lib/algorithm.php");
 
 /// INIT
 $db = new Database();
@@ -16,6 +17,7 @@ $kitchenType = new KitchenType($db->getConnection());
 $ingredient = new Ingredient($db->getConnection());
 $recipeInfo = new RecipeInfo($db->getConnection());
 $recipe = new Recipe($db->getConnection());
+$algorithm = new Algorithm($db->getConnection());
 
 
 /// VERWERK 
@@ -29,6 +31,7 @@ $recipe = new Recipe($db->getConnection());
 // $dataRecipe = $recipe->selectRecipe(1);
 // $dataFavourite = $recipe->determineFavourite(1, 3);
 $dataAllRecipes = $recipe->selectRecipe();
+$dataAlgorithm = $algorithm->boodschappenToevoegen(2, 2);
 
 /// RETURN
 // echo "<pre>"; var_dump($data); echo "</pre>";
@@ -36,5 +39,6 @@ $dataAllRecipes = $recipe->selectRecipe();
 // echo "<pre>"; var_dump($dataKitchenType); echo "</pre>";
 // echo "<pre>"; var_dump($dataIngredient); echo "</pre>";
 // echo "<pre>"; print_r($dataRecipe); echo "</pre>";
- echo "<pre>"; print_r($dataAllRecipes); echo "</pre>";
+// echo "<pre>"; print_r($dataAllRecipes); echo "</pre>";
+ echo "<pre>"; print_r($dataAlgorithm); echo "</pre>";
 // var_dump($dataFavourite);

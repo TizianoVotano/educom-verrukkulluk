@@ -24,7 +24,7 @@ class Recipe {
         if ($gerecht_id != null)
             $sql .= " WHERE id = $gerecht_id";
 
-        $returnRecipe;
+        $returnRecipe = [];
         $result = mysqli_query($this->connection, $sql);
         while ($recipe = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
             $user = $this->selectUser($recipe["user_id"]);
@@ -91,19 +91,6 @@ class Recipe {
         return $price;
     }
 
-    private function selectRating() {
-        return $this->recipe_info->selectRecipeInfo();
-    }
-
-    private function selectSteps() {
-        return $this->recipe_info->selectRecipeInfo();
-    }
-
-    private function selectRemarks($user_id) {
-        $this->selectUser($user_id);
-        return $this->recipe_info->selectRecipeInfo();
-    }
-
     private function selectKitchen($id) {
         return $this->kitchen_type->selectKitchenType($id);
     }
@@ -113,7 +100,7 @@ class Recipe {
     }
 
     public function determineFavourite($recipe_id, $user_id) {
-        $favourites = $this->selectRecipeInfo($recipe_id)["favoriet"];
+        $favourites = $this->selectRecipeInfo($recipe_id, "F")["favoriet"];
         foreach ($favourites as $favourite) {
             if($favourite["gerecht_id"] == $recipe_id && $favourite["user_id"] == $user_id){
                 return true;
