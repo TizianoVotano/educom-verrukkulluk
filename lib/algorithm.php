@@ -30,7 +30,7 @@ class Algorithm {
                 $oudeBoodschappen[] = ["id"=>$boodschap['id'], "aantal"=>$boodschap['aantal'] + $ingredient['aantal']];
             } else {
                 // artikel toevoegen
-                $nieuweBoodschappen[] = $ingredient["artikel_id"];
+                $nieuweBoodschappen[] = ["artikel_id"=>$ingredient["artikel_id"], "aantal"=>$ingredient["aantal"]];
             }
         }
 
@@ -57,7 +57,7 @@ class Algorithm {
         foreach ($nieuweBoodschappen as $boodschap) {
             print_r($boodschap);
             $sql = "INSERT INTO `boodschappen` (`user_id`, `artikel_id`, `aantal`) 
-                    VALUES ($user_id,, $ingredients),"; // ingredients.aantal?
+                    VALUES ($user_id, $boodschap[artikel_id], $boodschap[aantal]);"; // ingredients.aantal?
             if ($this->connection->query($sql) === TRUE)
                 echo "Records inserted succesfully";
             else
