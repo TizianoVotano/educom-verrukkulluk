@@ -9,7 +9,7 @@ class Ingredient {
     }
 
     public function selectIngredients($gerecht_id) {
-        $sql = "select * from ingredient where gerecht_id = $gerecht_id;";
+        $sql = "SELECT * FROM ingredient WHERE gerecht_id = $gerecht_id;";
         $result = mysqli_query($this->connection, $sql);
 
         $ingredients = mysqli_fetch_all($result, MYSQLI_ASSOC); 

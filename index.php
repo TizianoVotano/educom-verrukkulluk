@@ -31,6 +31,7 @@ $commisions = new Boodschappen($db->getConnection());
 // $dataRecipe = $recipe->selectRecipe(1);
 // $dataFavourite = $recipe->determineFavourite(1, 3);
  $dataAllRecipes = $recipe->selectRecipe();
+ findRecipes($dataAllRecipes, "knoflook zout veronica");
 // $dataComissions = $commisions->boodschappenToevoegen(2, 2);
 
 /// RETURN
@@ -38,7 +39,45 @@ $commisions = new Boodschappen($db->getConnection());
 // echo "<pre>"; var_dump($dataUsers); echo "</pre>";
 // echo "<pre>"; var_dump($dataKitchenType); echo "</pre>";
 // echo "<pre>"; var_dump($dataIngredient); echo "</pre>";
- echo "<pre>"; print_r($dataAllRecipes); echo "</pre>";
+// echo "<pre>"; print_r($dataAllRecipes); echo "</pre>";
 // echo "<pre>"; print_r($dataAllRecipes); echo "</pre>";
 // echo "<pre>"; print_r($dataComissions); echo "</pre>";
 // var_dump($dataFavourite);
+
+function findRecipes($recipes, $searchString) {
+    $searchStrings = explode(" ", strtolower($searchString));
+    function filter($values, $searchStrings) { 
+        foreach ($searchStrings as $string) {
+            return (str_contains(strtolower($values), strtolower($string)));
+        }        
+    }
+
+    $filteredRecipes = [];
+    foreach ($recipes as $recipe) {
+        if (filter($recipe["recipe"]["titel"], $searchStrings)) {
+            $filteredRecipes[] = $recipe;
+            continue;
+        }
+        foreach ($recipe["ingredients"] as $ingredients) {
+            if (filter($ingredients["naam"], $searchStrings)) {
+                $filteredRecipes[] = $recipe;
+                continue;
+            }
+        }
+        if (filter($recipe["type"]["omschrijving"], $searchStrings)) {
+            $filteredRecipes[] = $recipe;
+            continue;
+        }
+        if (filter($recipe["kitchen"]["omschrijving"], $searchStrings)) {
+            $filteredRecipes[] = $recipe;
+            continue;
+        }
+        if (filter($recipe["user"]["user_name"], $searchStrings)) {
+            $filteredRecipes[] = $recipe;
+            continue;
+        }
+    }
+    echo "<pre>";print_r($filteredRecipes);echo "</pre>";
+
+    return $filteredRecipes;
+}
