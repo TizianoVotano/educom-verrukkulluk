@@ -27,9 +27,17 @@ class Recipe {
         $returnRecipe = [];
         $result = mysqli_query($this->connection, $sql);
         while ($recipe = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $date = $recipe['datum_toegevoegd'];
+            $title = $recipe['titel'];
+            $shortDescription = $recipe['korte_omschrijving'];
+            $longDescription = $recipe['lange_omschrijving'];
+            $image = $recipe['afbeelding'];
+
             $user = $this->selectUser($recipe["user_id"]);
-            $kitchen = $this->selectKitchen($recipe["keuken_id"]); 
-            $type = $this->selectType($recipe["type_id"]);
+            $kitchenData = $this->selectKitchen($recipe["keuken_id"]); 
+            $kitchen = $kitchenData['omschrijving'];
+            $typeData = $this->selectType($recipe["type_id"]);
+            $type = $typeData['omschrijving'];
             $ingredients = $this->selectIngredients($recipe["id"]);
 
             $comments = $this->selectRecipeInfo($recipe["id"], "O");
@@ -40,13 +48,12 @@ class Recipe {
 
             $price = $this->calcPrice($ingredients);
             $calories = $this->calcCalories($ingredients);
-
-            $returnRecipe[] = ["user"=>$user, "price"=>$price, "calories"=>$calories, "recipe"=>$recipe,
-                        "comments"=>$comments, "preparation"=>$preparation, "favorite"=>$favorite, 
+            
+            $returnRecipe[] = ["date"=>$date, "title"=>$title, "shortDescription"=>$shortDescription, 
+                        "longDescription"=>$longDescription, "image"=>$image, "user"=>$user, "price"=>$price, 
+                        "calories"=>$calories, "comments"=>$comments, "preparation"=>$preparation, "favorite"=>$favorite, 
                         "rating"=>$rating, "kitchen"=>$kitchen, "type"=>$type, "ingredients"=>$ingredients];
         }
-
-       // echo "<pre>";print_r($returnRecipe);echo "</pre>";
         return($returnRecipe);
     }
 
