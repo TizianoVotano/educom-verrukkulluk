@@ -47,7 +47,7 @@ $commisions = new Boodschappen($db->getConnection());
 function findRecipes($recipes, $searchString) {
     $search = explode(" ", $searchString);
     $result = [];
-   // echo json_encode($recipe);
+   // echo json_encode($recipe); 
     foreach ($search as $searchterm) {
         foreach ($recipes as $recipe) { //echo "<pre>";print_r($recipe);echo "</pre>";
             $str = json_encode($recipe); 
