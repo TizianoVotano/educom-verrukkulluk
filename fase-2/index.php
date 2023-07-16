@@ -1,9 +1,9 @@
 <?php
 //// Allereerst zorgen dat de "Autoloader" uit vendor opgenomen wordt:
-require_once("./vendor/autoload.php");
+require_once("../vendor/autoload.php");
 
 /// Twig koppelen:
-$loader = new \Twig\Loader\FilesystemLoader("./templates");
+$loader = new \Twig\Loader\FilesystemLoader("../templates");
 /// VOOR PRODUCTIE:
 /// $twig = new \Twig\Environment($loader), ["cache" => "./cache/cc"]);
 
@@ -15,7 +15,8 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 
 /// Next step, iets met je data doen. Ophalen of zo
 require_once("lib/gerecht.php");
-$gerecht = new gerecht();
+require_once("../lib/recipe.php");
+$gerecht = new Gerecht();
 $data = $gerecht->selecteerGerecht();
 
 
