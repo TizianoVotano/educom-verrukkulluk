@@ -129,4 +129,22 @@ class Recipe {
         }
         return false;
     }
+
+    public function findRecipes($recipes, $searchString) {
+        $search = explode(" ", $searchString);
+        $result = [];
+        foreach ($search as $searchterm) {
+            foreach ($recipes as $recipe) { 
+                if (!in_array($recipe, $result)) { // filter
+                    $strRecipe = json_encode($recipe);
+                    $gevonden = str_contains($strRecipe, $searchterm);
+                    if ($gevonden) {
+                        $result[] = $recipe;
+                    }
+                }
+            }
+        }
+            
+        return $result;
+    }
 }
