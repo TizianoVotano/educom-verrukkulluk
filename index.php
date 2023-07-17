@@ -31,7 +31,7 @@ $commisions = new Boodschappen($db->getConnection());
 // $dataRecipe = $recipe->selectRecipe(1);
 // $dataFavourite = $recipe->determineFavourite(1, 3);
  $dataAllRecipes = $recipe->selectRecipe();
- findRecipes($dataAllRecipes, "knoflook");
+ findRecipes($dataAllRecipes, "bolog look");
 // $dataComissions = $commisions->boodschappenToevoegen(2, 2);
 
 /// RETURN
@@ -50,8 +50,8 @@ function findRecipes($recipes, $searchString) {
    // echo json_encode($recipe); 
     foreach ($search as $searchterm) {
         foreach ($recipes as $recipe) { //echo "<pre>";print_r($recipe);echo "</pre>";
-            $str = json_encode($recipe); 
-            $gevonden = strcmp($searchterm, $str);
+            $strRecipe = json_encode($recipe);
+            $gevonden = str_contains($strRecipe, $searchterm);
             if ($gevonden) {
                 $result[] = $recipe;
             }
