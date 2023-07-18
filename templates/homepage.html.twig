@@ -21,9 +21,13 @@
     <ul>
     {% for record in data %}
         <li>
-            <img src="{{ record.afbeelding }}" style="width: 100px; heigfht: 100px;">
+            <img src="assets/img/gerechten/{{ record.image }}.jpg" style="width: 100px; heigfht: 100px;">
 
-            {{ record.title }}
+            {{ record.title }} <br/>
+            {{ record.shortDescription}} <br/>
+            €{{ record.price}} <br/>
+            Calories: {{ record.calories}} <br/>
+            Rating: {{ record.rating}}
             {# sub-loop #}
             <ul>
                 {% for ingr in record.ingredienten %}
@@ -42,7 +46,7 @@
     <ul>
      {# Dump #}
        <pre>
-        {{ dump(data) }}
+        {#{ dump(data) }#}
        </pre>
 
 {% endblock %}
