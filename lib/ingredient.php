@@ -1,4 +1,5 @@
 <?php
+require_once("article.php");
 class Ingredient {
     private $connection;
     private $article;

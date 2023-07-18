@@ -21,14 +21,14 @@
     <ul>
     {% for record in data %}
         <li>
-            <img src="{{ record.foto }}" style="width: 100px; heigfht: 100px;">
+            <img src="{{ record.afbeelding }}" style="width: 100px; heigfht: 100px;">
 
             {{ record.title }}
             {# sub-loop #}
             <ul>
                 {% for ingr in record.ingredienten %}
                     <li>
-                        <span {% if ingr.id < 2 %}style='color: #F00'{% endif %}>{{  ingr.naam }}</span>
+                        <span {% if ingr.id < 2 %}style='color: #F00'{% endif %}>{{ ingr.naam }}</span>
 
                         {# if #}
                         {%  if ingr.id == 3 %}
