@@ -1,7 +1,7 @@
 <html lang="nl">
 <head>
 
-    <title>het is verrukkuluk! :: {{ TITEL }} </title>
+    <title>{{ title }} </title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 
     <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css" />
@@ -17,35 +17,49 @@
 <body>
 <div class="container-fluid">
 
-    <div class="row">
+    <header class="row header">
         <div class="col-md-12">
-        {% block header %}
-            
-        {% endblock %}   
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-3">
-            <h2>Agenda</h2>
-            <i class="fa fa-calendar"></i> FontAwesome <a href="https://fontawesome.com/icons?d=gallery&m=free">Documentation</a><br>
-            <i class="fa fa-file-pdf"></i><a href="https://www.layoutit.com/build">Layout-it</a>
-
+            <img class="logo" src="assets/img/logo-v2.png"/>
+            {% block header %}
+                
+            {% endblock %}   
+            <i class='fas fa-search' style='font-size:18px;color:red'></i>
+            <input type="text" placeholder="Zoeken" />
 
         </div>
-        <div class="col-md-9">
+    </header>
+
+    <main class="row">
+        <aside class="col-md-3 agenda">
+            <div>
+                <h2>Agenda</h2>
+                <i class="fa fa-calendar"></i> FontAwesome <a href="https://fontawesome.com/icons?d=gallery&m=free">Documentation</a><br>
+                <i class="fa fa-file-pdf"></i><a href="https://www.layoutit.com/build">Layout-it</a>
+                <h3>Vegetarisch koken</h3>
+                <label>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</label>
+                <h3>Vegetarisch koken</h3>
+                <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</p>
+                <h3>Vegetarisch koken</h3>
+                <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</p>
+                <h3>Vegetarisch koken</h3>
+                <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</p>
+                <h3>Vegetarisch koken</h3>
+                <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</p>
+            </div>
+        </aside>
+        <section class="col-md-9">
             <h2>Content</h2>
             {%  block content %}
             {%  endblock %}
-        </div>
-    </div>
+        </section>
+    </main>
 
 
-    <div class="row">
+    <footer class="row">
         <div class="col-md-12">
             <h1>Footer</h1>
         </div>
-    </div>
+    </footer>
 
 
 </div>
