@@ -30,6 +30,12 @@ class RecipeInfo {
         return $this->user->selectUser($user_id);
     }
 
+    public function addRating($gerecht_id, $rating) {
+        $sql = "INSERT INTO `gerecht_info` (`record_type`, `gerecht_id`, `nummeriekveld`)
+                VALUES ('W', $gerecht_id, $rating)";
+        return ($this->connection->query($sql) === TRUE);
+    }
+
     public function addFavourite($gerecht_id, $user_id) {
         $this->removeFavourite($gerecht_id, $user_id);
         $sql = "INSERT INTO `gerecht_info` (`record_type`, `gerecht_id`, `user_id`)
