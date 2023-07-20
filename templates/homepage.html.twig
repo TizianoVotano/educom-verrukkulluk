@@ -18,6 +18,14 @@
     <h4>Dit is de template {{  title }}</h4>
 
 {# Loop #}
+    
+
+    
+
+
+
+
+
     <ul>
     {% for record in data %}
         <li>
@@ -27,7 +35,12 @@
             {{ record.shortDescription}} <br/>
             €{{ record.price}} <br/>
             Calories: {{ record.calories}} <br/>
-            Rating: {{ record.rating}}
+            Rating: {{ record.rating}} <br/>
+            <span class="fa fa-star checked" data-value="1"></span>
+            <span class="fa fa-star" data-value="2"></span>
+            <span class="fa fa-star" data-value="3"></span>
+            <span class="fa fa-star" data-value="4"></span>
+            <span class="fa fa-star" data-value="5"></span>
             {# sub-loop #}
             <ul>
                 {% for ingr in record.ingredienten %}
@@ -48,5 +61,24 @@
        <pre>
         {#{ dump(data) }#}
        </pre>
+    <script>
+        $(document).ready(function () {
+            $(".fa-star").click(function () {
+                const value = $(this).attr('data-value');
+
+                /// Clear all the checked stars 
+                $(".fa-star").removeClass('checked');
+
+                $(".fa-star").each((index, elem) => {
+                            const ratingStar = $(elem).attr('data-value');
+                            if (ratingStar <= value) {
+                                $(elem).addClass('checked');
+                            }
+                        });
+            })
+
+        })    
+    </script>
 
 {% endblock %}
+
