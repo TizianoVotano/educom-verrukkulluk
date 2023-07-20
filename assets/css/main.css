@@ -63,6 +63,15 @@ html, body {
     max-height: 200px;
 }
 
+/* Main */
+.fa-star {
+    color: lightgray;
+}
+
+.checked {
+    color: #ffbb00;
+}
+
 /* Aside */
 .agenda {
     padding: 15px;
@@ -77,15 +86,45 @@ html, body {
 }
 
 .agenda div {
-    background-color: rgb(150,184,45);
+    background-color: var(--lighter-green);
     padding: 15px;
-} 
-
-/* Main */
-.fa-star {
-    color: lightgray;
 }
 
-.checked {
-    color: #ffbb00;
+/* Main.Section */
+.recipe {
+    border: 1px solid lightgray;
+    margin-bottom:5px;
+}
+
+.recipe > img {
+    width: 100%;
+    display: block;
+}
+
+.recipe > section {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    
+}
+
+.recipe header {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+
+.rating {
+    justify-self: end;
+}
+
+.recipe a {
+    display: inline-block;
+    background-color: var(--lighter-red);
+    text-decoration: none;
+    color: white;
+    padding-inline: 10px;
+    border-radius: 25px;
+    font-family: var(--heading);
+    font-size: 25px;
 }
