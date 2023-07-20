@@ -14,26 +14,37 @@
 
 {# Loop #}
     
-    <ul>
+    <div>
     {% for record in data %}
-        <li>
-            <img src="assets/img/gerechten/{{ record.image }}.jpg" style="width: 100px; heigfht: 100px;">
+        <div class="col-md-5 recipe">
+            <img src="assets/img/gerechten/{{ record.image }}.jpg" />
 
-            {{ record.title }} <br/>
-            {{ record.shortDescription}} <br/>
-            €{{ record.price}} <br/>
-            Calories: {{ record.calories}} <br/>
-            Rating: {{ record.rating}} <br/>
-            <div>
-                {% for i in 1..5 %}
-                    {% if i <= record.rating %}
-                        <span class="fa fa-star checked" data-value={{i}}></span>
-                    {% else %}
-                        <span class="fa fa-star" data-value={{i}}></span>
-                    {% endif %}
-                    
-                {% endfor %}
-            </div>
+            <section>
+                <header>
+                    <h3>{{ record.title }}</h3>
+                    <div class="rating">
+                        {% for i in 1..5 %}
+                            {% if i <= record.rating %}
+                                <span class="fa fa-star checked" data-value={{i}}></span>
+                            {% else %}
+                                <span class="fa fa-star" data-value={{i}}></span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </header>
+                
+                <p>{{ record.shortDescription}}</p>
+                <footer>
+                    <a href="https://google.com">Smullen!</a>
+                    <span>4</span>
+                    <span>€{{ record.price}}</span>
+                    <span>{{ record.calories}}</span>
+                </footer>
+                
+            </section>
+
+            
+            
             {# sub-loop #}
             <ul>
                 {% for ingr in record.ingredienten %}
@@ -47,7 +58,7 @@
                     </li>
                 {% endfor %}
             </ul>
-        </li>
+        </div>
     {% endfor %}
     <ul>
      {# Dump #}
