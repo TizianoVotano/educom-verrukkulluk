@@ -35,22 +35,28 @@
     </header>
 
     <main class="row">
-        <aside class="col-md-3 agenda">
-            <div>
-                <h2>Agenda</h2>
-                <i class="fa fa-calendar"></i> FontAwesome <a href="https://fontawesome.com/icons?d=gallery&m=free">Documentation</a><br>
-                <i class="fa fa-file-pdf"></i><a href="https://www.layoutit.com/build">Layout-it</a>
-                <h3>Vegetarisch koken</h3>
-                <label>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</label>
-                <h3>Vegetarisch koken</h3>
-                <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</p>
-                <h3>Vegetarisch koken</h3>
-                <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</p>
-                <h3>Vegetarisch koken</h3>
-                <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</p>
-                <h3>Vegetarisch koken</h3>
-                <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</p>
-            </div>
+        <aside class="col-md-3">
+            <section class="agenda">
+                <img src="assets\img\verrukkulluk-agenda.png" />
+            {% for i in 1..5 %}
+                <div class="agenda-item">
+                    <i class="fa fa-calendar"></i>
+                    <div>
+                        <h1>Vegetarisch koken</h1>
+                        <p>Een workshop vegetarisch koken, onder leiding van Trientje Hupsakee</p>
+                    </div>
+                 </div>
+            {% endfor %}
+            </section>
+            <section class="login">
+                <img src="assets\img\verrukkulluk-login.png" />
+                <label for="email">Email</label>
+                <input id="email" type="text" />
+                <label for="password">Wachtwoord</label>
+                <input id="password" type="password" />
+                <h2><input type="submit" value="Login"/></h2>
+                
+            </section>
         </aside>
         <section class="col-md-9">
             {%  block content %}

@@ -74,22 +74,65 @@ html, body {
 }
 
 /* Aside */
-.agenda {
+aside {
     padding: 15px;
 }
 
-.agenda h2 {
-    text-align: center;
+aside img {
+    width: 150px;
+    display: block;
+    margin-inline: auto;
 }
 
-.agenda h3 {
+.agenda {
+    background-color: var(--lighter-green);
+    padding: 25px;
+
+}
+.agenda-item {
+    display: flex;
+    align-items: first baseline;
+    justify-content: center;
+}
+.agenda-item h1 {
     margin-bottom: 0px;
 }
 
-.agenda div {
-    background-color: var(--lighter-green);
-    padding: 15px;
+.agenda-item > i {
+    font-size:35px;
+    margin-right: 15px;
+    color: white;
 }
+
+.login {
+    background-color: var(--darker-red);
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin-top: 15px;
+}
+
+.login > label {
+    font-weight: lighter;
+    color: white;
+}
+
+.login > h2 {
+    align-self: center;
+}
+
+.login input[type=submit]{
+    background-color: var(--lighter-orange);
+    border-radius: 15px;
+    padding-inline: 35px;
+    border: none;
+    color: white;
+}
+
+.login input[type="submit"]:hover {
+    background-color: var(--darker-orange);
+}
+
 
 /* Main.Section */
 .recipe {
