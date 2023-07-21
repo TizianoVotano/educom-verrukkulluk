@@ -16,12 +16,12 @@
     
     <div>
     {% for record in data %}
-        <div class="col-md-5 recipe">
-            <img src="assets/img/gerechten/{{ record.image }}.jpg" />
+        <div class="col-md-6 recipe">
+            <div class="recipe-img" style="background-image: url('assets/img/gerechten/{{ record.image }}.jpg');"></div>
 
             <section>
                 <header>
-                    <h3>{{ record.title }}</h3>
+                    <h1>{{ record.title }}</h1>
                     <div class="rating">
                         {% for i in 1..5 %}
                             {% if i <= record.rating %}
@@ -35,10 +35,18 @@
                 
                 <p>{{ record.shortDescription}}</p>
                 <footer>
-                    <a href="https://google.com">Smullen!</a>
-                    <span>4</span>
-                    <span>€{{ record.price}}</span>
-                    <span>{{ record.calories}}</span>
+                    <a class="recipe-btn" href="https://google.com">Smullen!</a>
+                    
+                    <div>
+                        <i class="material-icons" style="vertical-align: bottom">&#xe7fb;</i>
+                        <span>4</span>
+                        
+                        <i class='fas fa-euro-sign'></i>
+                        <span>{{ record.price}}</span>
+
+                        <i class="glyphicon glyphicon-fire"></i>
+                        <span>{{ record.calories}}</span>
+                    </div>
                 </footer>
                 
             </section>
@@ -62,9 +70,9 @@
     {% endfor %}
     <ul>
      {# Dump #}
-       <pre>
+       {# <pre> #}
         {#{ dump(data) }#}
-       </pre>
+       {# </pre> #}
     <script>
         $(document).ready(function () {
             $(".fa-star").click(function () {

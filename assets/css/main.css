@@ -56,6 +56,7 @@ html, body {
 .header {
     background-image: url(../img/vegetable-foods-1600x900.png);
     background-repeat: no-repeat;
+    background-size: cover;
     min-height: 400px;
 }
 
@@ -94,11 +95,22 @@ html, body {
 .recipe {
     border: 1px solid lightgray;
     margin-bottom:5px;
+    padding-right: 0px !important;
+    padding-left: 0px !important;
 }
 
-.recipe > img {
-    width: 100%;
+.recipe h1 {
+    color: var(--darker-green);
+}
+
+.recipe-img {
+    max-width: 100%;
     display: block;
+    width: 100%;
+    height: 200px;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .recipe > section {
@@ -118,13 +130,32 @@ html, body {
     justify-self: end;
 }
 
-.recipe a {
-    display: inline-block;
+.recipe-btn {
     background-color: var(--lighter-red);
-    text-decoration: none;
     color: white;
+    text-decoration: none !important;
     padding-inline: 10px;
     border-radius: 25px;
     font-family: var(--heading);
     font-size: 25px;
+}
+
+.recipe-btn:hover {
+    color: white;
+    background-color: var(--darker-red);
+}
+
+.recipe footer {
+    color: var(--lighter-red);
+    display: flex;
+    justify-content: space-between;
+}
+
+.recipe footer span {
+    color: black;
+    margin-right: 5px;
+}
+
+.recipe footer>div {
+    align-self: center;
 }
