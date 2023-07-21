@@ -18,7 +18,6 @@
     {% for record in data %}
         <div class="col-md-6 recipe">
             <div class="recipe-img" style="background-image: url('assets/img/gerechten/{{ record.image }}.jpg');"></div>
-
             <section>
                 <header>
                     <h1>{{ record.title }}</h1>
@@ -50,9 +49,6 @@
                 </footer>
                 
             </section>
-
-            
-            
             {# sub-loop #}
             <ul>
                 {% for ingr in record.ingredienten %}

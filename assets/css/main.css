@@ -199,6 +199,26 @@ aside img {
     margin-right: 5px;
 }
 
-.recipe footer>div {
+.recipe footer > div {
     align-self: center;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--darker-orange);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+}
+
+.footer img {
+    width: 130px;
+}
+
+.footer .logo {
+    grid-column: 1;
+}
+
+.footer p {
+    margin: 0px;
 }
