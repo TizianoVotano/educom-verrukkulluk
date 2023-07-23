@@ -204,21 +204,39 @@ aside img {
 }
 
 /* Footer */
+
 .footer {
     background-color: var(--darker-orange);
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 20px;
-}
-
-.footer img {
-    width: 130px;
+    grid-template-columns: 0.1fr 1fr;
+    color: white;
+    padding: 30px;padding-bottom: 60px;
+    gap: 10px;
+    justify-content: space-around;
 }
 
 .footer .logo {
     grid-column: 1;
+    grid-row: 1;
+    min-width: 120px;
 }
 
+.footer img {
+    padding: 0px;
+}
 .footer p {
     margin: 0px;
+}
+
+.contact-logo {
+    grid-row: 1;
+    grid-column: 2;
+    width: 180px;
+    align-self: center;
+}
+
+.contact-info {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: 14px;
 }
