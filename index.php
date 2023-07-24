@@ -44,6 +44,15 @@ switch($action) {
         break;
     }
 
+    /* Zoekfunctie
+    case "search": {
+        $data = $recipe->searchRecipes($recipe.selectRecipe(), $searchString);
+        $template = 'homepage.html.twig';
+        $title = "homepage";
+        break;
+    }
+    */
+
     case "detail": {
         $data = $recipe->selectRecipe($gerecht_id);
         $template = 'detail.html.twig';

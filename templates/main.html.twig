@@ -18,7 +18,7 @@
     <script type="text/javascript" language="javascript" src="assets/jquery/jquery-3.5.1.js"></script>
     <script type="text/javascript" language="javascript" src="assets/bootstrap/js/bootstrap.js"></script>
 
-</html>
+
 <body>
 <div class="container-fluid">
 
@@ -29,7 +29,7 @@
                 
             {% endblock %}   
             <i class='fas fa-search' style='font-size:18px;color:red'></i>
-            <input type="text" placeholder="Zoeken" />
+            <input type="text" id="searchBar" placeholder="Zoeken" onclick="findRecipes()"/>
 
         </div>
     </header>
@@ -78,4 +78,12 @@
 
 </div>
 
+<script>
+    function findRecipes() { // https://stackoverflow.com/questions/27381591/pass-variable-from-twig-to-js
+        const searchString = document.getElementById('searchBar');
+        alert("clicked");
+    }
+</script>
+
 </body>
+</html>
