@@ -14,7 +14,7 @@
 
 {# Loop #}
     
-    <div>
+    
     {% for record in data %}
         <div class="col-md-6 recipe">
             <div class="recipe-img" style="background-image: url('assets/img/gerechten/{{ record.image }}.jpg');"></div>
@@ -34,7 +34,7 @@
                 
                 <p>{{ record.shortDescription}}</p>
                 <footer>
-                    <a class="recipe-btn" href="https://google.com">Smullen!</a>
+                    <a class="recipe-btn" href="http://localhost/educom-verrukkulluk/index.php?action=detail&gerecht_id={{ record.id }}">Smullen!</a>
                     
                     <div>
                         <i class="material-icons" style="vertical-align: bottom">&#xe7fb;</i>
@@ -50,18 +50,18 @@
                 
             </section>
             {# sub-loop #}
-            <ul>
+            {# <ul>
                 {% for ingr in record.ingredienten %}
                     <li>
                         <span {% if ingr.id < 2 %}style='color: #F00'{% endif %}>{{ ingr.naam }}</span>
 
                         {# if #}
-                        {%  if ingr.id == 3 %}
+                        {#{%  if ingr.id == 3 %}
                             <strong>Dit is ID 3!</strong>
                         {%  endif  %}
                     </li>
                 {% endfor %}
-            </ul>
+            </ul> #}
         </div>
     {% endfor %}
     <ul>

@@ -27,6 +27,7 @@ class Recipe {
         $returnRecipe = [];
         $result = mysqli_query($this->connection, $sql);
         while ($recipe = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+            $id = $recipe['id'];
             $date = $recipe['datum_toegevoegd'];
             $title = $recipe['titel'];
             $shortDescription = $recipe['korte_omschrijving'];
@@ -49,7 +50,7 @@ class Recipe {
             $price = $this->calcPrice($ingredients);
             $calories = $this->calcCalories($ingredients);
             
-            $returnRecipe[] = ["date"=>$date, "title"=>$title, "shortDescription"=>$shortDescription, 
+            $returnRecipe[] = ["id"=>$id, "date"=>$date, "title"=>$title, "shortDescription"=>$shortDescription,
                         "longDescription"=>$longDescription, "image"=>$image, "user"=>$user, "price"=>$price, 
                         "calories"=>$calories, "comments"=>$comments, "preparation"=>$preparation, "favorite"=>$favorite, 
                         "rating"=>$rating, "kitchen"=>$kitchen, "type"=>$type, "ingredients"=>$ingredients];
