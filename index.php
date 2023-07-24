@@ -45,6 +45,7 @@ switch($action) {
     }
 
     /* Zoekfunctie
+    template js of jquery call (eventlistener) > href (URL) met action zoals homepage en details (deze switch) > index.php $recipe->searchRecipes()
     case "search": {
         $data = $recipe->searchRecipes($recipe.selectRecipe(), $searchString);
         $template = 'homepage.html.twig';
