@@ -66,11 +66,11 @@ html, body {
 
 /* Main */
 .fa-star {
-    color: lightgray;
+    color: lightgray !important;
 }
 
 .checked {
-    color: #ffbb00;
+    color: #ffbb00 !important;
 }
 
 /* Aside */
@@ -142,7 +142,7 @@ aside img {
     padding-left: 0px !important;
 }
 
-.recipe h1 {
+.recipe h1, .recipe-details h1 {
     color: var(--darker-green);
 }
 
@@ -188,18 +188,36 @@ aside img {
     background-color: var(--darker-red);
 }
 
-.recipe footer {
+.recipe-tags {
+    text-align: end;
+}
+
+.recipe-tags span {
+    
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.recipe-tags-kitchen {
+    background-color: var(--darker-orange);
+}
+
+.recipe-tags-type {
+    background-color: var(--lighter-green);
+}
+
+.recipe-info {
     color: var(--lighter-red);
     display: flex;
     justify-content: space-between;
 }
 
-.recipe footer span {
+.recipe-info span {
     color: black;
     margin-right: 5px;
 }
 
-.recipe footer > div {
+.recipe-info > div {
     align-self: center;
 }
 
@@ -210,7 +228,8 @@ aside img {
     display: grid;
     grid-template-columns: 0.1fr 1fr;
     color: white;
-    padding: 30px;padding-bottom: 60px;
+    padding: 30px;
+    padding-bottom: 60px;
     gap: 10px;
     justify-content: space-around;
 }
@@ -239,4 +258,14 @@ aside img {
     grid-column: 2;
     grid-row: 2;
     font-size: 14px;
+}
+
+/* DETAILPAGE */
+
+.recipe-details {
+    color: var(--lighter-red);
+}
+
+.recipe-details span {
+    color: black;
 }

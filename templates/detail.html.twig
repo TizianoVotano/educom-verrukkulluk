@@ -4,3 +4,131 @@
 <h1>Hallo Bram</h1>
 
 {% endblock %}
+
+{% block content %}
+    {{data.title}}
+    {% for recipe in data %}
+        
+        <div class="col-md-12">
+            <div class="recipe-img col-md-5" style="background-image: url('assets/img/gerechten/{{ recipe.image }}.jpg');"></div>
+            <section class="col-md-7 recipe-details">
+                <header>
+                    <div>
+                        <i class="material-icons" style="vertical-align: bottom">&#xe7fb;</i>
+                        <span>4</span>
+                        
+                        <i class='fas fa-euro-sign'></i>
+                        <span>{{ recipe.price}}</span>
+
+                        <i class="glyphicon glyphicon-fire"></i>
+                        <span>{{ recipe.calories}}</span>
+                    </div>
+                    <div style="display: grid; grid-template-columns: auto auto">
+                        <h1>{{ recipe.title}}</h1>
+                        <div class="rating">
+                            {% for i in 1..5 %}
+                                {% if i <= record.rating %}
+                                    <span class="fa fa-star checked" data-value={{i}}></span>
+                                {% else %}
+                                    <span class="fa fa-star" data-value={{i}}></span>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    
+
+                </header>
+            </section>
+        </div>
+
+        {# <div class="col-md-6 recipe">
+            <div class="recipe-img" style="background-image: url('assets/img/gerechten/{{ record.image }}.jpg');"></div>
+            <section>
+                <header>
+                    <h1>{{ record.title }}</h1>
+                    <div class="rating">
+                        {% for i in 1..5 %}
+                            {% if i <= record.rating %}
+                                <span class="fa fa-star checked" data-value={{i}}></span>
+                            {% else %}
+                                <span class="fa fa-star" data-value={{i}}></span>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </header>
+                
+                <p>{{ record.shortDescription}}</p>
+                <div class="recipe-tags" style="text-align: end">
+                    <span class="recipe-tags-kitchen">{{ record.kitchen }}</span>
+                    <span class="recipe-tags-type">{{ record.type }}</span>
+                </div>
+                <footer>
+                    <a class="recipe-btn" href="http://localhost/educom-verrukkulluk/index.php?action=detail&gerecht_id={{ record.id }}">Smullen!</a>
+                    
+                    <div>
+                        <i class="material-icons" style="vertical-align: bottom">&#xe7fb;</i>
+                        <span>4</span>
+                        
+                        <i class='fas fa-euro-sign'></i>
+                        <span>{{ record.price}}</span>
+
+                        <i class="glyphicon glyphicon-fire"></i>
+                        <span>{{ record.calories}}</span>
+                    </div>
+                </footer>
+                
+            </section> 
+        </div>
+        #}
+
+
+        
+
+
+
+
+
+
+
+
+
+
+        <p>4</p>
+        <p>{{recipe.price}}</p>
+        <p>{{recipe.calories}}</p>
+        <p>{{recipe.title}}</p>
+        <p>{{recipe.calories}}</p>
+
+        {% for i in 1..5 %}
+            {% if i <= record.rating %}
+                <span class="fa fa-star checked" data-value={{i}}></span>
+            {% else %}
+                <span class="fa fa-star" data-value={{i}}></span>
+            {% endif %}
+        {% endfor %}
+
+        <p>{{recipe.longDescription}}</p>
+        <h2>Ingredients</h2>
+        {% for ingredient in recipe.ingredients %}
+            <span>{{ingredient.naam}}</span>
+            <span>{{ingredient.omschrijving}}</span>
+            <span>{{ingredient.aantal}}</span>
+            <span>{{ingredient.verpakking}}____</span>
+        {% endfor %}
+        <br />
+        <h2>Preparation</h2>
+        {% for step in recipe.preparation %}
+            <span>{{step.nummeriekveld}}: {{step.tekstveld}} </span>
+        {% endfor %}
+        
+        <h2>Comments</h2>
+        {% for comment in recipe.comments %}
+            <span>{{comment.user_name}}: </span> <br />
+            <span>{{comment.tekstveld}}</span>
+        {% endfor %}
+
+        <pre>{{dump(data)}}</pre>
+        
+    {% endfor %}
+{% endblock %}
