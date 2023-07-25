@@ -33,7 +33,11 @@
                 </header>
                 
                 <p>{{ record.shortDescription}}</p>
-                <footer>
+                <div class="recipe-tags" style="text-align: end">
+                    <span class="recipe-tags-kitchen">{{ record.kitchen }}</span>
+                    <span class="recipe-tags-type">{{ record.type }}</span>
+                </div>
+                <footer class="recipe-info">
                     <a class="recipe-btn" href="http://localhost/educom-verrukkulluk/index.php?action=detail&gerecht_id={{ record.id }}">Smullen!</a>
                     
                     <div>
@@ -69,24 +73,6 @@
        {# <pre> #}
         {#{ dump(data) }#}
        {# </pre> #}
-    <script>
-        $(document).ready(function () {
-            $(".fa-star").click(function () {
-                const value = $(this).attr('data-value');
-                console.log(this);
-
-                /// Clear all the checked stars 
-                $(this).parent().children().removeClass('checked');
-
-                $(this).parent().children().each((index, elem) => { 
-                            const ratingStar = $(elem).attr('data-value');
-                            if (ratingStar <= value) {
-                                $(elem).addClass('checked');
-                            }
-                        });
-            })
-        })    
-    </script>
 
 {% endblock %}
 

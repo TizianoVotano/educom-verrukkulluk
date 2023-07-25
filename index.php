@@ -44,6 +44,15 @@ switch($action) {
         break;
     }
 
+    /* TRANSACTIES:
+    Homepage,
+    detailpagina, 
+    rating toevoegen  -  aantal, gerechtid
+    favorieten / verw - gerechtid, userid
+    boodschappen toevoegen - gerechtid, userid
+    zoeken - keyword
+    */
+
     /* Zoekfunctie
     template js of jquery call (eventlistener) > href (URL) met action zoals homepage en details (deze switch) > index.php $recipe->searchRecipes()
     case "search": {

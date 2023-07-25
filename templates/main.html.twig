@@ -83,6 +83,22 @@
         const searchString = document.getElementById('searchBar');
         alert("clicked");
     }
+        $(document).ready(function () {
+            $(".fa-star").click(function () {
+                const value = $(this).attr('data-value');
+                console.log(this);
+
+                /// Clear all the checked stars 
+                $(this).parent().children().removeClass('checked');
+
+                $(this).parent().children().each((index, elem) => { 
+                            const ratingStar = $(elem).attr('data-value');
+                            if (ratingStar <= value) {
+                                $(elem).addClass('checked');
+                            }
+                        });
+            })
+        })    
 </script>
 
 </body>
