@@ -206,19 +206,19 @@ aside img {
     background-color: var(--lighter-green);
 }
 
-.recipe-info {
+.recipe > section > footer {
     color: var(--lighter-red);
     display: flex;
     justify-content: space-between;
 }
 
+.recipe-info {
+    align-self: center;
+}
+
 .recipe-info span {
     color: black;
     margin-right: 5px;
-}
-
-.recipe-info > div {
-    align-self: center;
 }
 
 /* Footer */
@@ -261,11 +261,22 @@ aside img {
 }
 
 /* DETAILPAGE */
-
 .recipe-details {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.recipe-details i {
     color: var(--lighter-red);
 }
 
-.recipe-details span {
-    color: black;
+.recipe-details .title {
+    display: grid; 
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+
+.title > h1 {
+    margin-top: 10px;
 }
