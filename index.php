@@ -16,8 +16,10 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 /// Next step, iets met je data doen. Ophalen of zo
 require_once("./lib/database.php");
 require_once("./lib/recipe.php");
+require_once("./lib/recipe_info.php");
 $db = new Database(); 
 $recipe = new Recipe($db->getConnection());
+$recipe_info = new RecipeInfo($db->getConnection());
 $data = $recipe->selectRecipe();
 
 // SEARCHBAR TEST
@@ -44,6 +46,23 @@ switch($action) {
         break;
     }
 
+    case "detail": {
+        $data = $recipe->selectRecipe($gerecht_id);
+        $template = 'detail.html.twig';
+        $title = "detailpage";
+        break;
+    }
+
+    case "edit_favourite": {
+        $gerecht_id = $_GET['gerecht_id'];
+        $user_id = $_GET['user_id'];
+        if (!$recipe->determineFavourite($gerecht_id, $user_id)) {
+            $recipe_info->addFavourite($gerecht_id, $user_id);
+        } else {
+            $recipe_info->removeFavourite($gerecht_id, $user_id);
+        }
+        break;
+    }
     /* TRANSACTIES:
     Homepage,
     detailpagina, 
@@ -63,12 +82,7 @@ switch($action) {
     }
     */
 
-    case "detail": {
-        $data = $recipe->selectRecipe($gerecht_id);
-        $template = 'detail.html.twig';
-        $title = "detailpage";
-        break;
-    }
+    
 
         /// etc
 }

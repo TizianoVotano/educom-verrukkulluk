@@ -99,7 +99,26 @@
                         });
             })
 
-            
+            $("#favouriteBtn").click(function () { alert("click")
+                $.ajax({ 
+                    url:"./index.php",
+                    type: "GET",
+                    data: {
+                        user_id: 1,
+                        gerecht_id: 1, // {{ recipe.id }}
+                        action: "edit_favourite"
+                    },
+                    success: function (data) {
+                        header("Content-Type: application/json");
+                        echo json_encode($data);
+                        console.log(data);
+                        alert("the function works");
+                    }
+                }).done(function() { alert("complete")
+                    console.log()
+                    $("#favouriteBtn").toggleClass('far fas');
+                })
+            })
         })    
 </script>
 
