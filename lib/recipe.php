@@ -122,7 +122,7 @@ class Recipe {
     }
 
     public function determineFavourite($recipe_id, $user_id) {
-        $favourites = $this->selectRecipeInfo($recipe_id, "F")["favoriet"];
+        $favourites = $this->selectRecipeInfo($recipe_id, "F");
         foreach ($favourites as $favourite) {
             if($favourite["gerecht_id"] == $recipe_id && $favourite["user_id"] == $user_id){
                 return true;
