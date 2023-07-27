@@ -177,7 +177,7 @@ aside img {
     background-color: var(--lighter-red);
     color: white;
     text-decoration: none !important;
-    padding-inline: 10px;
+    padding-inline: 20px;
     border-radius: 25px;
     font-family: var(--heading);
     font-size: 25px;
@@ -269,6 +269,8 @@ aside img {
 
 .recipe-details i {
     color: var(--lighter-red);
+    height: 24px;
+    font-size: 24px;
 }
 
 .recipe-details .title {
@@ -280,3 +282,12 @@ aside img {
 .title > h1 {
     margin-top: 10px;
 }
+
+.recipe-details footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* #favouriteBtn:hover {
+    background-color: black;
+} */
