@@ -99,7 +99,7 @@
                         });
             })
 
-            $("#favouriteBtn").click(function () { alert("click")
+            $("#favouriteBtn").click(function () {
                 $.ajax({ 
                     url:"./index.php",
                     type: "GET",
@@ -108,14 +108,8 @@
                         gerecht_id: 1, // {{ recipe.id }}
                         action: "edit_favourite"
                     },
-                    success: function (data) {
-                        header("Content-Type: application/json");
-                        echo json_encode($data);
-                        console.log(data);
-                        alert("the function works");
-                    }
-                }).done(function() { alert("complete")
-                    console.log()
+                }).done(function(data) { // 1 = favorite, 0 = not
+                    console.log(data)
                     $("#favouriteBtn").toggleClass('far fas');
                 })
             })

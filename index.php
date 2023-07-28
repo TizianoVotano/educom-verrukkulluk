@@ -54,13 +54,20 @@ switch($action) {
     }
 
     case "edit_favourite": {
-        $gerecht_id = $_GET['gerecht_id'];
-        $user_id = $_GET['user_id'];
+        header("content-type: application/json; charset=utf-8");
+        $gerecht_id = json_decode($_GET['gerecht_id']);
+        $user_id = json_decode($_GET['user_id']);
+        
+        $status;
         if (!$recipe->determineFavourite($gerecht_id, $user_id)) {
             $recipe_info->addFavourite($gerecht_id, $user_id);
+            $status = 1;
         } else {
             $recipe_info->removeFavourite($gerecht_id, $user_id);
+            $status = 0;
         }
+        echo json_encode($status);
+        exit();
         break;
     }
     /* TRANSACTIES:
