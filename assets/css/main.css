@@ -261,16 +261,23 @@ aside img {
 }
 
 /* DETAILPAGE */
+.template-container {
+    display: flex;
+    flex-direction: column;
+}
+
 .recipe-details {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-inline: 35px !important;
+    padding-block: 25px;
 }
 
 .recipe-details i {
     color: var(--lighter-red);
-    height: 24px;
-    font-size: 24px;
+    height: 20px;
+    font-size: 20px;
 }
 
 .recipe-details .title {
@@ -288,6 +295,123 @@ aside img {
     justify-content: space-between;
 }
 
-/* #favouriteBtn:hover {
-    background-color: black;
-} */
+.recipe-block {
+    padding-left: 0px !important;
+    box-shadow: 0px 1px 2px 2px lightgray;
+    display: flex;
+}
+
+.recipe-details-img {
+    width: 100%;
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Details Tabs */
+/* Component Needs */
+ .pc-tab > input, .pc-tab section > div {
+	 display: none;
+}
+ #tab1:checked ~ section .tab1, 
+ #tab2:checked ~ section .tab2, 
+ #tab3:checked ~ section .tab3 {
+	 display: block;
+     border-top: 0px;
+}
+ #tab1:checked ~ nav .tab1, 
+ #tab2:checked ~ nav .tab2, 
+ #tab3:checked ~ nav .tab3 {
+	 color: red;
+}
+/* Visual Styles */
+ *, *:after, *:before {
+	 -webkit-box-sizing: border-box;
+	 -moz-box-sizing: border-box;
+	 box-sizing: border-box;
+}
+.detail-tabs h1 {
+	 text-align: center;
+	 font-weight: 100;
+	 font-size: 60px;
+	 color: #e74c3c;
+}
+ .pc-tab {
+	 width: 100%;
+	 margin: 0 auto;
+}
+ .pc-tab ul {
+	 list-style: none;
+	 margin: 0;
+	 padding: 0;
+}
+ .pc-tab ul li label {
+	 float: left;
+     border-radius: 75px 75px 0px 0px;
+	 padding: 5px 35px;
+	 border: 1px solid #ddd;
+	 border-bottom: 0;
+	 background: #eee;
+}
+
+.pc-tab ul li label h4 {
+    margin-block: 0px;
+    font-size: 22px;
+}
+ .pc-tab ul li label:hover {
+	 background: #ddd;
+}
+ .pc-tab ul li label:active {
+	 background: #fff;
+}
+ .pc-tab ul li:not(:last-child) label {
+	 border-right-width: 0;
+}
+ .pc-tab section {
+	 font-family: "Droid Serif";
+	 clear: both;
+}
+ .pc-tab section div {
+	 padding: 20px;
+	 width: 100%;
+	 border: 1px solid #ddd;
+	 background: #fff;
+	 line-height: 1.5em;
+	 letter-spacing: 0.3px;
+	 color: #444;
+}
+ .pc-tab section div h2 {
+	 margin: 0;
+	 font-family: "Raleway";
+	 letter-spacing: 1px;
+	 color: #34495e;
+}
+ #tab1:checked ~ nav .tab1 label, 
+ #tab2:checked ~ nav .tab2 label, 
+ #tab3:checked ~ nav .tab3 label {
+	 background: white;
+	 color: #111;
+	 position: relative;
+}
+ #tab1:checked ~ nav .tab1 label:after, 
+ #tab2:checked ~ nav .tab2 label:after, 
+ #tab3:checked ~ nav .tab3 label:after {
+	 content: '';
+	 display: block;
+	 position: absolute;
+	 height: 2px;
+	 width: 100%;
+	 background: #fff;
+	 left: 0;
+	 bottom: -1px;
+}
+.detail-tabs footer {
+	 margin-top: 50px;
+	 font-size: 14px;
+	 color: #ccc;
+	 text-align: center;
+}
+.detail-tabs footer a {
+	 color: #aaa;
+	 text-decoration: none;
+}
