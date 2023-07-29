@@ -85,18 +85,37 @@
     }
         $(document).ready(function () {
             $(".fa-star").click(function () {
-                const value = $(this).attr('data-value');
-                console.log(this);
+                const rating = $(this).attr('data-value');
+                console.log('rating: ' + rating);
+                const recipe_id = $(this).parent().attr('data-recipe-id');
+                console.log('recipe_id:  ' + recipe_id)
+
+                /// Add Rating
+                const data = {
+                    gerecht_id: recipe_id,
+                    rating: rating,
+                    action: "add_rating"
+                }
+                $.ajax({
+                    url: "./index.php",
+                    method: "GET",
+                    data: data,
+                    success: function (data) {
+                        alert("Successful");
+                        console.log(data);
+                    }
+                })
 
                 /// Clear all the checked stars 
                 $(this).parent().children().removeClass('checked');
 
+                /// Refill to the clicked star
                 $(this).parent().children().each((index, elem) => { 
-                            const ratingStar = $(elem).attr('data-value');
-                            if (ratingStar <= value) {
-                                $(elem).addClass('checked');
-                            }
-                        });
+                    const ratingStar = $(elem).attr('data-value');
+                    if (ratingStar <= rating) {
+                        $(elem).addClass('checked');
+                    }
+                });
             })
 
             $("#favouriteBtn").click(function () {

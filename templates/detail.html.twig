@@ -26,7 +26,7 @@
                     </div>
                     <div class="title">
                         <h1>{{ recipe.title}}</h1>
-                        <div class="rating">
+                        <div class="rating" data-recipe-id={{recipe.id}}>
                             {% for i in 1..5 %}
                                 {% if i <= recipe.rating %}
                                     <span class="fa fa-star checked" data-value={{i}}></span>

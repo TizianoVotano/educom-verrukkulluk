@@ -70,6 +70,16 @@ switch($action) {
         exit();
         break;
     }
+
+    case "add_rating": {
+        header("content-type: application/json; charset=utf-8");
+        $gerecht_id = json_decode($_GET['gerecht_id']);
+        $rating = json_decode($_GET['rating']);
+        $status = $recipe_info->addRating($gerecht_id, $rating);
+        echo json_encode($status);
+        exit();
+        break;
+    }
     /* TRANSACTIES:
     Homepage,
     detailpagina, 

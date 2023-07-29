@@ -21,7 +21,7 @@
             <section>
                 <header>
                     <h1>{{ record.title }}</h1>
-                    <div class="rating">
+                    <div class="rating" data-recipe-id={{record.id}}>
                         {% for i in 1..5 %}
                             {% if i <= record.rating %}
                                 <span class="fa fa-star checked" data-value={{i}}></span>
