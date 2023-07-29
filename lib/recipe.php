@@ -35,6 +35,10 @@ class Recipe {
             $image = $recipe['afbeelding'];
 
             $user = $this->selectUser($recipe["user_id"]);
+            $user_name = $user["user_name"];
+            $user_email = $user["email"];
+            $user_image = $user["afbeelding"];
+
             $kitchenData = $this->selectKitchen($recipe["keuken_id"]); 
             $kitchen = $kitchenData['omschrijving'];
             $typeData = $this->selectType($recipe["type_id"]);
@@ -51,7 +55,9 @@ class Recipe {
             $calories = $this->calcCalories($ingredients);
             
             $returnRecipe[] = ["id"=>$id, "date"=>$date, "title"=>$title, "shortDescription"=>$shortDescription,
-                        "longDescription"=>$longDescription, "image"=>$image, "user"=>$user, "price"=>$price, 
+                        "longDescription"=>$longDescription, "image"=>$image,
+                        "user_name"=>$user_name, "user_email"=>$user_email, "user_image"=>$user_image,
+                        "price"=>$price, 
                         "calories"=>$calories, "comments"=>$comments, "preparation"=>$preparation, "favorite"=>$favorite, 
                         "rating"=>$rating, "kitchen"=>$kitchen, "type"=>$type, "ingredients"=>$ingredients];
         }

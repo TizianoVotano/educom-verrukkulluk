@@ -36,10 +36,16 @@
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="recipe-tags">
-                        <span class="recipe-tags-kitchen">{{ recipe.kitchen }}</span>
-                        <span class="recipe-tags-type">{{ recipe.type }}</span>
+                    <div class="header-bottom">
+                        <div class="author">
+                            {{recipe.date}}, {{recipe.user_name}}
+                        </div>
+                        <div class="recipe-tags">
+                            <span class="recipe-tags-kitchen">{{ recipe.kitchen }}</span>
+                            <span class="recipe-tags-type">{{ recipe.type }}</span>
+                        </div>
                     </div>
+                    
                 </header>
                 <p>{{ recipe.longDescription}}</p>
                 <footer>
@@ -110,7 +116,9 @@
                     </div>
                 </section>
             </div>
-        </div> 
+        </div>
+        
+        <pre>{{dump(data)}}</pre>
     {% endfor %}
     </div>
 {% endblock %}

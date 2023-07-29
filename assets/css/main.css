@@ -280,6 +280,16 @@ aside img {
     font-size: 20px;
 }
 
+.header-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.author {
+    color: var(--lighter-brown);
+    font-weight: bold;
+}
+
 .recipe-details .title {
     display: grid; 
     grid-template-columns: auto auto;
@@ -309,7 +319,7 @@ aside img {
 }
 
 /* Details Tabs */
-/* Component Needs */
+    /* Component Needs */
  .pc-tab > input, .pc-tab section > div {
 	 display: none;
 }
@@ -324,7 +334,7 @@ aside img {
  #tab3:checked~nav .tab3 {
      color: red;
  }
-/* Visual Styles */
+    /* Visual Styles */
  *, *:after, *:before {
 	 -webkit-box-sizing: border-box;
 	 -moz-box-sizing: border-box;
@@ -353,17 +363,13 @@ aside img {
 	 border-bottom: 0;
 	 background: #eee;
 }
-
 .pc-tab h4, .pc-tab h3, .pc-tab h2 {
     color: var(--darker-green);
     margin-block: 0px;
 }
-
 .pc-tab ul li label h4 {
     font-size: 22px;
 }
-
-
  .pc-tab ul li label:hover {
 	 background: #ddd;
 }
@@ -377,7 +383,6 @@ aside img {
 	 font-family: "Droid Serif";
 	 clear: both;
 }
-
 .pc-tab section > div {
 	padding: 40px;
     padding-left: 50px;
