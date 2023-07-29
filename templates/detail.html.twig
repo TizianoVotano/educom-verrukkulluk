@@ -62,119 +62,55 @@
                         </label>
                     </li>
                     <li class="tab2">
-                        <label for="tab2">Bereidingswijze</label>
+                        <label for="tab2">
+                            <h4>Bereidingswijze</h4>
+                        </label>
                     </li>
                     <li class="tab3">
-                        <label for="tab3">Opmerkingen</label>
+                        <label for="tab3">
+                            <h4>Opmerkingen</h4>
+                        </label>
                     </li>
                     </ul>
                 </nav>
+
                 <section>
                     <div class="tab1">
-                        <h2>First</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus itaque quidem minus nostrum, voluptatem accusamus aspernatur quia harum ratione, officia laudantium inventore autem doloribus atque labore numquam non. Hic, animi.</p>
+                        {% for ingredient in recipe.ingredients %}
+                            <div class="tab-content">
+                                <img src="https://www.inter-drinks.be/wp-content/uploads/2022/08/linguine-barilla-oro-chef-n%C2%B0-13-1kg-1.jpg" />
+                                <div>
+                                    <h3>{{ingredient.naam}}</h3>
+                                    <p>{{ingredient.omschrijving}}</p>
+                                    <span><h4>Hoeveelheid:</h4> {{ingredient.aantal}} {{ingredient.verpakking}}</span>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                     <div class="tab2">
-                        <h2>Second</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum nesciunt ipsum dolore error repellendus officiis aliquid a, vitae reprehenderit, accusantium vero, ad. Obcaecati numquam sapiente cupiditate. Praesentium eaque, quae error!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis, maiores.</p>
+                        {% for step in recipe.preparation %}
+                            <div class="tab-content">
+                                <span class="step-logo">{{step.nummeriekveld}}.</span>
+                                <div>
+                                    <p>{{step.tekstveld}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                     <div class="tab3">
-                        <h2>Third</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, nobis culpa rem, vitae earum aliquid.</p>
+                        {% for comment in recipe.comments %}
+                            <div class="tab-content">
+                                <div class="step-image" style="background-image: url(./assets/img/users/{{comment.afbeelding}}.jpg);"></div>
+                                <div>
+                                    <h2>{{comment.user_name}}</h2>
+                                    <p>{{comment.tekstveld}}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
                 </section>
             </div>
-        </div>
-
-        {# <div class="col-md-6 recipe">
-            <div class="recipe-img" style="background-image: url('assets/img/gerechten/{{ record.image }}.jpg');"></div>
-            <section>
-                <header>
-                    <h1>{{ record.title }}</h1>
-                    <div class="rating">
-                        {% for i in 1..5 %}
-                            {% if i <= record.rating %}
-                                <span class="fa fa-star checked" data-value={{i}}></span>
-                            {% else %}
-                                <span class="fa fa-star" data-value={{i}}></span>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </header>
-                
-                <p>{{ record.shortDescription}}</p>
-                <div class="recipe-tags" style="text-align: end">
-                    <span class="recipe-tags-kitchen">{{ record.kitchen }}</span>
-                    <span class="recipe-tags-type">{{ record.type }}</span>
-                </div>
-                <footer>
-                    <a class="recipe-btn" href="http://localhost/educom-verrukkulluk/index.php?action=detail&gerecht_id={{ record.id }}">Smullen!</a>
-                    
-                    <div>
-                        <i class="material-icons" style="vertical-align: bottom">&#xe7fb;</i>
-                        <span>4</span>
-                        
-                        <i class='fas fa-euro-sign'></i>
-                        <span>{{ record.price}}</span>
-
-                        <i class="glyphicon glyphicon-fire"></i>
-                        <span>{{ record.calories}}</span>
-                    </div>
-                </footer>
-                
-            </section> 
-        </div>
-        #}
-
-
-        
-
-
-
-
-
-
-
-
-
-
-        <p>4</p>
-        <p>{{recipe.price}}</p>
-        <p>{{recipe.calories}}</p>
-        <p>{{recipe.title}}</p>
-        <p>{{recipe.calories}}</p>
-
-        {% for i in 1..5 %}
-            {% if i <= record.rating %}
-                <span class="fa fa-star checked" data-value={{i}}></span>
-            {% else %}
-                <span class="fa fa-star" data-value={{i}}></span>
-            {% endif %}
-        {% endfor %}
-
-        <p>{{recipe.longDescription}}</p>
-        <h2>Ingredients</h2>
-        {% for ingredient in recipe.ingredients %}
-            <span>{{ingredient.naam}}</span>
-            <span>{{ingredient.omschrijving}}</span>
-            <span>{{ingredient.aantal}}</span>
-            <span>{{ingredient.verpakking}}____</span>
-        {% endfor %}
-        <br />
-        <h2>Preparation</h2>
-        {% for step in recipe.preparation %}
-            <span>{{step.nummeriekveld}}: {{step.tekstveld}} </span>
-        {% endfor %}
-        
-        <h2>Comments</h2>
-        {% for comment in recipe.comments %}
-            <span>{{comment.user_name}}: </span> <br />
-            <span>{{comment.tekstveld}}</span>
-        {% endfor %}
-
-        <pre>{{dump(data)}}</pre>
-        
+        </div> 
     {% endfor %}
     </div>
 {% endblock %}
