@@ -16,7 +16,7 @@ class Boodschappen {
     public function selectBoodschappen($user_id = null) {
         // a.*, b.* this sequence is necessary because we need b.id, 
         // and selecting everything with * will overwrite b.id with a.id (final id will overwrite former one)
-        $sql = "SELECT * FROM boodschappen b JOIN artikel a ON (b.artikel_id = a.id)";
+        $sql = "SELECT a.*, b.* FROM boodschappen b JOIN artikel a ON (b.artikel_id = a.id)";
         if ($user_id != null)
             $sql .= " WHERE b.user_id = $user_id";
         $result = mysqli_query($this->connection, $sql);
