@@ -14,28 +14,42 @@ class Boodschappen {
     }
 
     public function selectBoodschappen($user_id = null) {
-        $sql = "SELECT * FROM boodschappen";
+        // a.*, b.* this sequence is necessary because we need b.id, 
+        // and selecting everything with * will overwrite b.id with a.id (final id will overwrite former one)
+        $sql = "SELECT * FROM boodschappen b JOIN artikel a ON (b.artikel_id = a.id)";
         if ($user_id != null)
-            $sql .= " WHERE user_id = $user_id";
+            $sql .= " WHERE b.user_id = $user_id";
         $result = mysqli_query($this->connection, $sql);
-        $boodschappen = mysqli_fetch_all($result, MYSQLI_ASSOC);
+        $commissions = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-        return $boodschappen;
-    }
-
-    private function calcPrice($ingredients) {        
-        $price = 0;
-        foreach ($ingredients as $ingredient) {
-            $quantity = $ingredient["aantal"];
-            $unit = $ingredient["eenheid"];
-            $unitPrice = $ingredient["prijs"];
-
+        $commissionsWithArticles = [];
+        foreach ($commissions as $commission) {
+            $quantity = $commission["aantal"];
             if ($quantity < 0)
                 $quantity = 0;
-            $price += ceil($quantity / $unit) * $unitPrice;
+            $unit = $commission["eenheid"];
+            $unitPrice = $commission["prijs"];
+
+            $commissionPrice = ceil($quantity / $unit) * $unitPrice;
+
+            $commissionsWithArticles[] = [
+                "id"=>$commission['id'],
+                "user_id"=>$commission['user_id'],
+                "artikel_id"=>$commission['artikel_id'],
+                "aantal"=>$commission['aantal'],
+                "naam"=>$commission['naam'],
+                "omschrijving"=>$commission['omschrijving'],
+                "prijs"=>$commission['prijs'],
+                "eenheid"=>$commission['eenheid'],
+                "verpakking"=>$commission['verpakking'],
+                "calories"=>$commission['calories'],
+                "commissie_prijs"=>$commissionPrice
+            ];
         }
 
-        return $price;
+        //echo "<pre>"; print_r($commissionsWithArticles);echo "</pre>";
+
+        return $commissionsWithArticles;
     }
 
     public function boodschappenToevoegen($recipe_id, $user_id) {

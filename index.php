@@ -48,28 +48,22 @@ switch($action) {
     case "homepage": {
         $data = $recipe->selectRecipe();
         $template = "homepage.html.twig";
-        $title = "homepage";
+        $title = "Homepage";
         break;
     }
 
     case "detail": {
         $data = $recipe->selectRecipe($gerecht_id);
         $template = "detail.html.twig";
-        $title = "detailpage";
+        $title = "Detailpage";
         break;
     }
 
     case "groceries": {
         $commisions->boodschappenToevoegen($gerecht_id, $user_id);
-        $groceries = $commisions->selectBoodschappen($user_id);
-        
-        foreach ($groceries as $grocery) {
-            $article_id = $grocerys;
-            $article->selectArticle($article_id);
-        }
-        
+        $data = $commisions->selectBoodschappen($user_id);
         $template = "groceries.html.twig";
-        $title = "groceries";
+        $title = "Groceries";
         break;
     }
 
