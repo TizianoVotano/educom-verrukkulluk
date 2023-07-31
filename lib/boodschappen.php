@@ -17,12 +17,25 @@ class Boodschappen {
         $sql = "SELECT * FROM boodschappen";
         if ($user_id != null)
             $sql .= " WHERE user_id = $user_id";
-
-        $sql = "SELECT * FROM boodschappen WHERE user_id = $user_id";
         $result = mysqli_query($this->connection, $sql);
         $boodschappen = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         return $boodschappen;
+    }
+
+    private function calcPrice($ingredients) {        
+        $price = 0;
+        foreach ($ingredients as $ingredient) {
+            $quantity = $ingredient["aantal"];
+            $unit = $ingredient["eenheid"];
+            $unitPrice = $ingredient["prijs"];
+
+            if ($quantity < 0)
+                $quantity = 0;
+            $price += ceil($quantity / $unit) * $unitPrice;
+        }
+
+        return $price;
     }
 
     public function boodschappenToevoegen($recipe_id, $user_id) {
@@ -47,14 +60,10 @@ class Boodschappen {
 
         // artikels toevoegen
         foreach ($commisionsToInsert as $boodschap) {
-            print_r($boodschap);
             $sql = "INSERT INTO `boodschappen` (`user_id`, `artikel_id`, `aantal`) 
                     VALUES ($user_id, $boodschap[artikel_id], $boodschap[aantal]);";
             $this->connection->query($sql);
         }
-
-        echo "<pre>";print_r($commisionsToUpdate);echo "</pre>";
-        echo "<pre>";print_r($commisionsToInsert);echo "</pre>";
     }
 
     public function artikelOpLijst($article_id, $user_id) {

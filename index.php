@@ -17,10 +17,15 @@ $twig->addExtension(new \Twig\Extension\DebugExtension());
 require_once("./lib/database.php");
 require_once("./lib/recipe.php");
 require_once("./lib/recipe_info.php");
+require_once("./lib/boodschappen.php");
+require_once("./lib/article.php");
 $db = new Database(); 
 $recipe = new Recipe($db->getConnection());
 $recipe_info = new RecipeInfo($db->getConnection());
 $data = $recipe->selectRecipe();
+
+$commisions = new Boodschappen($db->getConnection());
+$article = new Article($db->getConnection());
 
 // SEARCHBAR TEST
 // $data = $recipe->selectRecipe();
@@ -29,11 +34,12 @@ $data = $recipe->selectRecipe();
 // FINAL TEST
 // require_once("lib/boodschappen.php");
 // $commisions = new Boodschappen($db->getConnection());
-// $dataComissions = $commisions->boodschappenToevoegen(2, 2);
+// $dataComissions = $commisions->boodschappenToevoegen(2, 2); //var_dump($dataComissions);
 
 // URL: http://localhost/index.php?gerecht_id=4&action=detail
 $gerecht_id = isset($_GET["gerecht_id"]) ? $_GET["gerecht_id"] : "";
 $action = isset($_GET["action"]) ? $_GET["action"] : "homepage";
+$user_id = isset($_GET["user_id"]) ? $_GET["user_id"] : "";
 
 $template = "homepage.html.twig";
 $title = "homepage";
@@ -41,15 +47,29 @@ $title = "homepage";
 switch($action) {
     case "homepage": {
         $data = $recipe->selectRecipe();
-        $template = 'homepage.html.twig';
+        $template = "homepage.html.twig";
         $title = "homepage";
         break;
     }
 
     case "detail": {
         $data = $recipe->selectRecipe($gerecht_id);
-        $template = 'detail.html.twig';
+        $template = "detail.html.twig";
         $title = "detailpage";
+        break;
+    }
+
+    case "groceries": {
+        $commisions->boodschappenToevoegen($gerecht_id, $user_id);
+        $groceries = $commisions->selectBoodschappen($user_id);
+        
+        foreach ($groceries as $grocery) {
+            $article_id = $grocerys;
+            $article->selectArticle($article_id);
+        }
+        
+        $template = "groceries.html.twig";
+        $title = "groceries";
         break;
     }
 
