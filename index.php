@@ -66,6 +66,14 @@ switch($action) {
         $title = "Groceries";
         break;
     }
+    
+    case "deleteCommission" : {
+        $id = json_decode(isset($_GET["id"]) ? $_GET["id"] : null);
+        $commisions->removeBoodschap($id);
+        echo json_encode($id);
+        exit();
+        break;
+    }
 
     case "edit_favourite": {
         header("content-type: application/json; charset=utf-8");

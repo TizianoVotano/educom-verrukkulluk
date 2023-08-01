@@ -52,6 +52,13 @@ class Boodschappen {
         return $commissionsWithArticles;
     }
 
+    public function removeBoodschap($id = null) {
+        $sql = "DELETE FROM `boodschappen`";
+        if ($id)
+            $sql .= " WHERE `id` = $id";
+        return ($this->connection->query($sql) === TRUE);
+    }
+
     public function boodschappenToevoegen($recipe_id, $user_id) {
         $ingredients = $this->ingredients->selectIngredients($recipe_id);
 

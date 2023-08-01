@@ -5,21 +5,43 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Boodschappen</h1>
-    {% for commission in data %}
-        <div>
-            <img/>
-            <div>
-                <h2></h2>
-                <p></p>
-            </div>
-            <div>
-                <i></i>
-                <span></span>
-            </div>
+    <div class="groceries-page">
+        <h1>Boodschappen</h1>
+        <div class="groceries">
+        {% set totalPrice = 0 %}
+        {% for commission in data %}
+            {% set value = (commission.aantal and commission.eenheid ? commission.aantal / commission.eenheid : 0) |round(0, 'ceil') %}
+            {% set totalPrice = totalPrice + commission.commissie_prijs %}
+            {# <div>{{commission.aantal}} {{commission.eenheid}}</div> #}
+            <div class="grocery" data-id="{{commission.id}}">
+                <img src="https://www.inter-drinks.be/wp-content/uploads/2022/08/linguine-barilla-oro-chef-n%C2%B0-13-1kg-1.jpg"/>
+                <div class="description">
+                    <h2>{{commission.naam}}</h2>
+                    <p>{{commission.omschrijving}}</p>
+                </div>
+                <div class="options">
+                    <div class="amount-data">{{ value }}</div> {# Math.ceil()! #}
+                    <div>
+                        <i class='fas fa-euro-sign'></i>
+                        <span>{{commission.commissie_prijs}}</span>
+                    </div>
+                    <i class="fa fa-check check-btn"></i>
+                    <i class="material-icons del-btn">delete</i>                    
+                </div>
 
+            </div>
+            
+        {% endfor %}
         </div>
-        
-    {% endfor %}
-    <pre>{{dump(data)}}</pre>
+        <footer style="display: flex">
+            <h2>Totaal</h2>
+            <div class="price">
+                <i class='fas fa-euro-sign'></i>
+                <span id="totalPrice">{{totalPrice}}</span>
+            </div>
+            <i class="material-icons" id="delAllBtn">delete</i>
+        </footer>
+           
+    </div>
+    {# <pre>{{dump(data)}}</pre> #}
 {% endblock %}

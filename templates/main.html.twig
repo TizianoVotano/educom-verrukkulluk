@@ -34,7 +34,7 @@
         </div>
     </header>
 
-    <main class="row">
+    <main class="row main">
         <aside class="col-md-3">
             <section class="agenda">
                 <img src="assets\img\verrukkulluk-agenda.png" />
@@ -64,7 +64,7 @@
         </section>
     </main>
 
-    <footer class="footer row">
+    <footer class="row footer">
             <img class="logo" src="assets\img\verrukkulluk-pay-off.png" />
             <img class="contact-logo" src="assets\img\verrukkulluk-contact.png" />
             <div class="contact-info">
@@ -131,6 +131,52 @@
                     console.log(data)
                     $("#favouriteBtn").toggleClass('far fas');
                 })
+            })
+            
+            $(".del-btn").click(function () { 
+                if (confirm("Bent u zeker dat u dit wil verwijderen?")) {
+                    const data = {
+                        user_id: 1,
+                        id: $(this).parent().parent().data("id"),
+                        action: "deleteCommission"
+                    }
+                    $.ajax({
+                        url:"./index.php", 
+                        type:"GET",
+                        data
+                    })
+                    .done(function(data) {
+                        alert("Success");
+                        console.log(data);
+                        const selectedGrocery = $('.grocery').filter(function() {
+                            return $(this).data("id") == data
+                        });
+                        selectedGrocery.remove();                    
+                    })
+                }
+                
+            })
+
+            $("#delAllBtn").click(function () { 
+                if (confirm("Bent u zeker dat u alle boodschappen wil verwijderen?")) {
+                    const data = {
+                        user_id: 1,
+                        action: "deleteCommission"
+                    }
+                    $.ajax({
+                        url:"./index.php", 
+                        type:"GET",
+                        data
+                    })
+                    .done(function(data) {
+                        alert("Success");
+                        $('#totalPrice').text('0');
+                        console.log(data);
+                        const selectedGrocery = $('.groceries');
+                        selectedGrocery.empty();
+                    })
+                }
+                
             })
         })    
 </script>
