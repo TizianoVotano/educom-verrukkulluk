@@ -14,9 +14,9 @@
 
 {# Loop #}
     
-    
+    <div class="homepage-container">
     {% for record in data %}
-        <div class="col-md-6 recipe">
+        <div class="col-md-12 recipe">
             <div class="recipe-img" style="background-image: url('assets/img/gerechten/{{ record.image }}.jpg');"></div>
             <section>
                 <header>
@@ -32,7 +32,7 @@
                     </div>
                 </header>
                 
-                <p>{{ record.shortDescription}}</p>
+                <p class="short-description">{{ record.shortDescription}}</p>
                 <div class="recipe-tags">
                     <span class="recipe-tags-kitchen">{{ record.kitchen }}</span>
                     <span class="recipe-tags-type">{{ record.type }}</span>
@@ -68,8 +68,7 @@
             </ul> #}
         </div>
     {% endfor %}
-    <ul>
-     {# Dump #}
+    </div>
        {# <pre> #}
         {#{ dump(data) }#}
        {# </pre> #}

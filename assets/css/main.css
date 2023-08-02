@@ -31,19 +31,27 @@
 
 /** PAGE DIVISION **/
 .header {
-    margin-bottom: 15px;
+    margin-bottom: 0px;
 }
 .main {
-
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    gap: 60px;
+    padding-inline: 60px;
 }
 .main > aside {
-    padding-left: 30px;
+    grid-column: 1;
+    padding: 0px;
 }
 .main > section {
-    padding-top: 15px;
-    padding-right: 30px;
+    padding: 0px;
 }
-.footer{}
+.main > section > .homepage-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    padding: 0px;
+}
 
 /** HEADING **/
 h1, h2, h3, h4, h5, h6 {
@@ -142,7 +150,7 @@ aside img {
     display: flex;
     flex-direction: column;
     padding: 10px;
-    margin-top: 15px;
+    margin-top: 45px;
 }
 
 .login > label {
@@ -220,6 +228,9 @@ aside img {
     color: white;
     background-color: var(--darker-red);
 }
+.short-description {
+    flex-basis: 90px;
+}
 
 .recipe-tags {
     text-align: end;
@@ -294,9 +305,10 @@ aside img {
 }
 
 /* DETAILPAGE */
-.template-container {
+.details-container {
     display: flex;
     flex-direction: column;
+    gap: 35px;
 }
 
 .recipe-details {
