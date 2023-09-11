@@ -12,7 +12,7 @@ The frontend is built with Twig, the backend with PHP.
 * CSS
 * MySQL
 
-## Methoden & Technieken
+## Methods & Techniques
 
 ### Entity Relationship Diagram
 <img src="documents\design\VER-ERD-Uitgewerkt-gegevensmodel-TV-v1.jpg" />
