@@ -15,7 +15,7 @@ The frontend is built with Twig, the backend with PHP.
 ## Methods & Techniques
 
 ### Entity Relationship Diagram
-<img src="documents\design\VER-ERD-Uitgewerkt-gegevensmodel-TV-v1.jpg" />
+<img src="documents\design\VER-ERD-Uitgewerkt-gegevensmodel-TV-v1.PNG" />
 
 ### Transaction Model
 <img src="documents\design\VER-TRA-Uitgewerkt-transactiemodel-TV-v1.png" />
